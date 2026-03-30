@@ -1,300 +1,336 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
 
-    <link rel="icon" type="image/x-icon" href="fav/favicon.png">
+  <link rel="icon" type="image/x-icon" href="fav/favicon.png">
 
-    <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook -->
 
-    <meta property="og:title" content="Hackaton – folk fusion kapela s autorskou tvorbou" />
-    <meta property="og:description" content="Koncerty, hudba, videa, zpěvník a další novinky pražské kapely Hackaton." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.hackaton.cz/" />
-    <meta property="og:image" content="https://www.hackaton.cz/share/image-1200-630.jpg" />
-    <meta property="og:locale" content="cs_CZ" />
+  <meta property="og:title" content="Hackaton – folk fusion kapela s autorskou tvorbou" />
+  <meta property="og:description" content="Koncerty, hudba, videa, zpěvník a další novinky pražské kapely Hackaton." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.hackaton.cz/" />
+  <meta property="og:image" content="https://www.hackaton.cz/share/image-1200-630.jpg" />
+  <meta property="og:locale" content="cs_CZ" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hackaton – folk fusion kapela s autorskou tvorbou" />
-    <meta name="twitter:description" content="Koncerty, hudba, videa, zpěvník a další novinky pražské kapely Hackaton." />
-    <meta name="twitter:image" content="https://www.hackaton.cz/background/image.jpg" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hackaton – folk fusion kapela s autorskou tvorbou" />
+  <meta name="twitter:description" content="Koncerty, hudba, videa, zpěvník a další novinky pražské kapely Hackaton." />
+  <meta name="twitter:image" content="https://www.hackaton.cz/background/image.jpg" />
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hackatón</title>
   <meta name="description" content="Hackatón — autorský folk-rock & pop. Koncerty, hudba, video, zpěvník a kontakt." />
   <style>
-    :root{
-      --bg:#050505;
-      --text:#fff7ef;
-      --muted:rgba(255,247,239,.78);
-      --glass:rgba(255,255,255,.08);
-      --glass-strong:rgba(255,255,255,.12);
-      --border:rgba(255,255,255,.14);
-      --shadow:0 18px 60px rgba(0,0,0,.45);
-      --accent:#ffb35c;
-      --accent-2:#ff6a3d;
-      --accent-3:#ffd36a;
-      --radius:24px;
-      --widget-h:auto;
-      --gap:18px;
-      --content-max:1600px;
+    :root {
+      --bg: #050505;
+      --text: #fff7ef;
+      --muted: rgba(255, 247, 239, .78);
+      --glass: rgba(255, 255, 255, .08);
+      --glass-strong: rgba(255, 255, 255, .12);
+      --border: rgba(255, 255, 255, .14);
+      --shadow: 0 18px 60px rgba(0, 0, 0, .45);
+      --accent: #ffb35c;
+      --accent-2: #ff6a3d;
+      --accent-3: #ffd36a;
+      --radius: 24px;
+      --widget-h: auto;
+      --gap: 18px;
+      --content-max: 1600px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--text);
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow-x:hidden;
-      background:#000;
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+      background: #000;
     }
 
     /* Desktop background image */
-    @media (min-width: 768px){
-      body{
+    @media (min-width: 768px) {
+      body {
         background:
-          linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+          linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)),
           url('/background/image.jpg') center/cover no-repeat fixed;
       }
     }
 
     /* Mobile colorful stage lights */
-    @media (max-width: 767px){
-      body{
+    @media (max-width: 767px) {
+      body {
         background:
-          radial-gradient(circle at 20% 15%, rgba(255,200,50,0.35), transparent 25%),
-          radial-gradient(circle at 80% 20%, rgba(255,80,0,0.35), transparent 25%),
-          radial-gradient(circle at 30% 70%, rgba(255,0,0,0.30), transparent 25%),
-          radial-gradient(circle at 70% 75%, rgba(255,150,0,0.30), transparent 25%),
-          radial-gradient(circle at 50% 40%, rgba(255,220,120,0.25), transparent 30%),
+          radial-gradient(circle at 20% 15%, rgba(255, 200, 50, 0.35), transparent 25%),
+          radial-gradient(circle at 80% 20%, rgba(255, 80, 0, 0.35), transparent 25%),
+          radial-gradient(circle at 30% 70%, rgba(255, 0, 0, 0.30), transparent 25%),
+          radial-gradient(circle at 70% 75%, rgba(255, 150, 0, 0.30), transparent 25%),
+          radial-gradient(circle at 50% 40%, rgba(255, 220, 120, 0.25), transparent 30%),
           #000;
       }
     }
 
     body::before,
-    body::after{
-      content:"";
-      position:fixed;
-      pointer-events:none;
-      z-index:0;
-      filter:blur(90px);
-      opacity:.9;
-      transform:translateZ(0);
-      border-radius:50%;
-    }
-    body::before{
-      top:-120px; left:-80px; width:320px; height:320px;
-      background:rgba(255,64,32,.22);
-      animation:floatA 14s ease-in-out infinite alternate;
-    }
-    body::after{
-      top:-90px; right:-80px; width:360px; height:360px;
-      background:rgba(255,197,74,.18);
-      animation:floatB 16s ease-in-out infinite alternate;
-    }
-    @keyframes floatA{
-      from{transform:translate3d(0,0,0) scale(1)}
-      to{transform:translate3d(18px,26px,0) scale(1.08)}
-    }
-    @keyframes floatB{
-      from{transform:translate3d(0,0,0) scale(1)}
-      to{transform:translate3d(-20px,18px,0) scale(1.06)}
+    body::after {
+      content: "";
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(90px);
+      opacity: .9;
+      transform: translateZ(0);
+      border-radius: 50%;
     }
 
-    .page{
-      position:relative;
-      z-index:1;
-      width:100%;
-      padding:24px 16px 40px;
+    body::before {
+      top: -120px;
+      left: -80px;
+      width: 320px;
+      height: 320px;
+      background: rgba(255, 64, 32, .22);
+      animation: floatA 14s ease-in-out infinite alternate;
     }
 
-    .shell{
-      width:100%;
-      max-width:var(--content-max);
-      margin:0 auto;
+    body::after {
+      top: -90px;
+      right: -80px;
+      width: 360px;
+      height: 360px;
+      background: rgba(255, 197, 74, .18);
+      animation: floatB 16s ease-in-out infinite alternate;
     }
 
-    .hero{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      gap:8px;
-      margin-bottom:22px;
+    @keyframes floatA {
+      from {
+        transform: translate3d(0, 0, 0) scale(1)
+      }
+
+      to {
+        transform: translate3d(18px, 26px, 0) scale(1.08)
+      }
     }
 
-    .logo-wrap{
-      width:min(100%, 740px);
-      padding:0;
-      background:none;
-      border:0;
-      box-shadow:none;
-    }
-    .logo-wrap img{
-      width:100%;
-      height:auto;
-      display:block;
+    @keyframes floatB {
+      from {
+        transform: translate3d(0, 0, 0) scale(1)
+      }
+
+      to {
+        transform: translate3d(-20px, 18px, 0) scale(1.06)
+      }
     }
 
-    .subtitle{
-      margin:0;
-      font-size:18px;
-      line-height:1.45;
-      color:var(--muted);
-      text-align:center;
-      text-wrap:balance;
-    }
-    .subtitle.small{
-      font-size:16px;
-      margin-top:2px;
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 24px 16px 40px;
     }
 
-    .social-row{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      margin:6px 0;
-      flex-wrap:wrap;
+    .shell {
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
     }
-    .social-link{
-      width:48px;
-      height:48px;
-      display:grid;
-      place-items:center;
-      text-decoration:none;
-      color:var(--text);
-      border-radius:50%;
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12);
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .logo-wrap {
+      width: min(100%, 740px);
+      padding: 0;
+      background: none;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--muted);
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .subtitle.small {
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 6px 0;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      color: var(--text);
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .06));
+      border: 1px solid rgba(255, 255, 255, .14);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .12);
       backdrop-filter: blur(14px);
-      transition:transform .22s ease, background .22s ease, border-color .22s ease;
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
     }
+
     .social-link:hover,
-    .social-link:focus-visible{
-      transform:translateY(-2px) scale(1.03);
-      background:linear-gradient(180deg, rgba(255,179,92,.18), rgba(255,106,61,.10));
-      border-color:rgba(255,211,106,.36);
-      outline:none;
-    }
-    .social-link svg{
-      width:22px;
-      height:22px;
-      display:block;
-      fill:currentColor;
+    .social-link:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      background: linear-gradient(180deg, rgba(255, 179, 92, .18), rgba(255, 106, 61, .10));
+      border-color: rgba(255, 211, 106, .36);
+      outline: none;
     }
 
-    .nav{
-      display:grid;
-      grid-template-columns:repeat(9, minmax(0, 1fr));
-      align-items:stretch;
-      gap:8px;
-      margin:10px 0 0;
-      width:100%;
+    .social-link svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      fill: currentColor;
     }
-    .nav a{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-width:0;
-      padding:10px 6px;
-      text-align:center;
-      text-decoration:none;
-      color:var(--text);
-      font-size:11px;
-      font-weight:800;
-      letter-spacing:.01em;
-      white-space:nowrap;
-      border-radius:999px;
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.12);
+
+    .nav {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 8px;
+      margin: 10px 0 0;
+      width: 100%;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 10px 6px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
       backdrop-filter: blur(14px);
-      box-shadow:none;
-      position:relative;
-      z-index:1;
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
       transition:
         background .18s ease,
         border-color .18s ease,
         box-shadow .18s ease;
     }
 
-    @media (hover:hover) and (pointer:fine){
+    @media (hover:hover) and (pointer:fine) {
+
       .nav a:hover,
-      .nav a:focus-visible{
-        background:rgba(255,179,92,.14);
-        border-color:rgba(255,211,106,.34);
+      .nav a:focus-visible {
+        background: rgba(255, 179, 92, .14);
+        border-color: rgba(255, 211, 106, .34);
         box-shadow:
-          0 0 10px rgba(255,180,70,.22),
-          0 0 22px rgba(255,120,40,.14);
-        outline:none;
+          0 0 10px rgba(255, 180, 70, .22),
+          0 0 22px rgba(255, 120, 40, .14);
+        outline: none;
       }
 
-      .nav a.active{
-        background:rgba(255,255,255,.07);
-        border-color:rgba(255,255,255,.12);
-        box-shadow:none;
+      .nav a.active {
+        background: rgba(255, 255, 255, .07);
+        border-color: rgba(255, 255, 255, .12);
+        box-shadow: none;
       }
     }
 
-    @media (max-width:1100px){
-      .nav{
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:10px;
+    @media (max-width:1100px) {
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
       }
-      .nav a{
-        display:block;
-        flex:0 1 auto;
-        min-width:118px;
-        padding:11px 14px;
-        font-size:14px;
-        white-space:nowrap;
+
+      .nav a {
+        display: block;
+        flex: 0 1 auto;
+        min-width: 118px;
+        padding: 11px 14px;
+        font-size: 14px;
+        white-space: nowrap;
       }
     }
 
-    @media (max-width:640px){
+    @media (max-width:640px) {
+
       .nav a:hover,
-      .nav a:focus-visible{
-        background:rgba(255,179,92,.14);
-        border-color:rgba(255,211,106,.34);
-        box-shadow:0 10px 24px rgba(255,166,71,.16);
+      .nav a:focus-visible {
+        background: rgba(255, 179, 92, .14);
+        border-color: rgba(255, 211, 106, .34);
+        box-shadow: 0 10px 24px rgba(255, 166, 71, .16);
       }
 
-      .nav a.active{
-        background:rgba(255,255,255,.07);
-        border-color:rgba(255,255,255,.12);
-        box-shadow:none;
+      .nav a.active {
+        background: rgba(255, 255, 255, .07);
+        border-color: rgba(255, 255, 255, .12);
+        box-shadow: none;
       }
     }
 
-    .widgets{
-      display:flex;
-      flex-wrap:wrap;
-      gap:var(--gap);
-      align-items:stretch;
-      justify-content:center;
+    .widgets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap);
+      align-items: stretch;
+      justify-content: center;
     }
 
-    .widget{
-      flex:1 1 calc(33.333% - var(--gap));
-      max-width:calc(33.333% - 12px);
-      min-width:280px;
-      height:auto;
-      min-height:420px;
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .widget {
+      flex: 1 1 calc(33.333% - var(--gap));
+      max-width: calc(33.333% - 12px);
+      min-width: 280px;
+      height: auto;
+      min-height: 420px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .06));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(18px) saturate(125%);
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-      scroll-margin-top:24px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      scroll-margin-top: 24px;
       transition:
         transform .22s ease,
         border-color .22s ease,
@@ -302,139 +338,153 @@
         background .22s ease;
     }
 
-    @media (hover:hover) and (pointer:fine){
-      .widget:hover{
-        transform:translateY(-3px);
-        border-color:rgba(255,211,106,.24);
+    @media (hover:hover) and (pointer:fine) {
+      .widget:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 211, 106, .24);
         box-shadow:
-          0 18px 60px rgba(0,0,0,.45),
-          0 0 0 1px rgba(255,211,106,.10),
-          0 0 28px rgba(255,166,71,.12);
-        background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.07));
+          0 18px 60px rgba(0, 0, 0, .45),
+          0 0 0 1px rgba(255, 211, 106, .10),
+          0 0 28px rgba(255, 166, 71, .12);
+        background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .07));
       }
     }
 
-    .widget-title{
-      margin:0 0 14px;
-      text-align:center;
-      font-size:22px;
-      line-height:1.2;
-      letter-spacing:.02em;
-      color:#fff7ef;
-      text-shadow:0 2px 18px rgba(255,166,71,.18);
-      flex:0 0 auto;
+    .widget-title {
+      margin: 0 0 14px;
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: .02em;
+      color: #fff7ef;
+      text-shadow: 0 2px 18px rgba(255, 166, 71, .18);
+      flex: 0 0 auto;
     }
 
-    .widget-body{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      height:100%;
-      min-height:0;
-    }
-    .push-bottom{
-      margin-top:auto;
+    .widget-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+      min-height: 0;
     }
 
-    .stack{display:flex; flex-direction:column; gap:10px;}
-    .fill{flex:1 1 auto;}
-
-    .muted{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-      text-wrap:balance;
+    .push-bottom {
+      margin-top: auto;
     }
 
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-    .concert-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:6px;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#2a1507;
-      background:linear-gradient(135deg, #ffd36a, #ff9a4d 52%, #ff6a3d);
-      box-shadow:0 10px 22px rgba(255,106,61,.18);
+    .fill {
+      flex: 1 1 auto;
+    }
+
+    .muted {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+      text-wrap: balance;
     }
 
 
-    .member-button{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      text-decoration:none;
-      color:var(--text);
-      width:100%;
-      padding:14px 16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      transition:transform .18s ease, border-color .18s ease, background .18s ease;
-      cursor:pointer;
-      font:inherit;
-      text-align:left;
+    .concert-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #2a1507;
+      background: linear-gradient(135deg, #ffd36a, #ff9a4d 52%, #ff6a3d);
+      box-shadow: 0 10px 22px rgba(255, 106, 61, .18);
     }
+
+
+    .member-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
+
     .member-button:hover,
-    .member-button:focus-visible{
-      transform:translateY(-1px);
-      border-color:rgba(255,211,106,.26);
-      background:rgba(255,255,255,.07);
-      outline:none;
+    .member-button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 211, 106, .26);
+      background: rgba(255, 255, 255, .07);
+      outline: none;
     }
-    .member-photo{
-      float:right;
-      width:min(38%, 190px);
-      max-width:190px;
-      margin:0 0 14px 18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 10px 28px rgba(0,0,0,.28);
-      object-fit:cover;
-    }
-    .member-copy p{
-      margin:0 0 14px;
-      font-size:14px;
-      line-height:1.7;
-      color:var(--text);
-    }
-    .member-copy p:last-child{ margin-bottom:0; }
 
-    @media (max-width:640px){
-      .member-photo{
-        float:none;
-        display:block;
-        width:100%;
-        max-width:none;
-        margin:0 0 14px 0;
+    .member-photo {
+      float: right;
+      width: min(38%, 190px);
+      max-width: 190px;
+      margin: 0 0 14px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .28);
+      object-fit: cover;
+    }
+
+    .member-copy p {
+      margin: 0 0 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .member-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width:640px) {
+      .member-photo {
+        float: none;
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0 0 14px 0;
       }
     }
 
     .concert-button,
     .action-link,
-    .song-link{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      text-decoration:none;
-      color:var(--text);
-      width:100%;
-      padding:14px 16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      transition:transform .18s ease, border-color .18s ease, background .18s ease;
-      cursor:pointer;
-      font:inherit;
-      text-align:left;
+    .song-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
     }
 
     .concert-button:hover,
@@ -444,618 +494,714 @@
     .song-link:hover,
     .song-link:focus-visible,
     .member-button:hover,
-    .member-button:focus-visible{
-      transform:translateY(-1px);
-      border-color:rgba(255,211,106,.26);
-      background:rgba(255,255,255,.07);
-      outline:none;
+    .member-button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 211, 106, .26);
+      background: rgba(255, 255, 255, .07);
+      outline: none;
     }
 
     .concert-left,
-    .action-left{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
+    .action-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
     }
 
     .action-icon,
-    .concert-icon{
-      width:40px;
-      height:40px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      background:linear-gradient(180deg, rgba(255,179,92,.18), rgba(255,106,61,.12));
-      border:1px solid rgba(255,211,106,.2);
-      color:var(--text);
-      flex:0 0 auto;
+    .concert-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255, 179, 92, .18), rgba(255, 106, 61, .12));
+      border: 1px solid rgba(255, 211, 106, .2);
+      color: var(--text);
+      flex: 0 0 auto;
     }
+
     .action-icon svg,
-    .concert-icon svg{
-      width:18px;
-      height:18px;
-      fill:currentColor;
+    .concert-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     .action-text,
-    .concert-text{
-      min-width:0;
+    .concert-text {
+      min-width: 0;
     }
+
     .action-title,
-    .concert-title{
-      font-size:15px;
-      font-weight:800;
-      line-height:1.3;
-      margin:0;
+    .concert-title {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
     }
+
     .action-desc,
-    .concert-desc{
-      margin:3px 0 0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
+    .concert-desc {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
     }
 
 
-        .photo-card{
-          position:relative;
-          display:block;
-          flex:1 1 auto;
-          min-height:0;
-          overflow:hidden;
-          border-radius:20px;
-          border:1px solid rgba(255,255,255,.12);
-          box-shadow:0 12px 32px rgba(0,0,0,.25);
-          background:rgba(255,255,255,.04);
-          cursor:pointer;
-          transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-        }
-        .photo-card:hover,
-        .photo-card:focus-visible{
-          transform:translateY(-1px);
-          border-color:rgba(255,211,106,.34);
-          box-shadow:0 14px 36px rgba(0,0,0,.30), 0 0 24px rgba(255,166,71,.14);
-          outline:none;
-        }
-        .photo-card.photo-button{
-          width:100%;
-          padding:0;
-          appearance:none;
-          -webkit-appearance:none;
-        }
-        .photo-card img{
-          width:100%;
-          height:100%;
-          min-height:280px;
-          object-fit:cover;
-          display:block;
-        }
-        .photo-overlay{
-          position:absolute;
-          inset:auto 0 0 0;
-          padding:16px 18px;
-          background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.72));
-        }
-        .photo-label{
-          margin:0;
-          font-size:14px;
-          font-weight:700;
-          color:rgba(255,247,239,.92);
-        }
+    .photo-card {
+      position: relative;
+      display: block;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
+      background: rgba(255, 255, 255, .04);
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
 
-    .video-card{
-      position:relative;
-      display:block;
-      flex:1 1 auto;
-      min-height:0;
-      overflow:hidden;
-      border-radius:20px;
-      text-decoration:none;
-      color:var(--text);
+    .photo-card:hover,
+    .photo-card:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 211, 106, .34);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, .30), 0 0 24px rgba(255, 166, 71, .14);
+      outline: none;
+    }
+
+    .photo-card.photo-button {
+      width: 100%;
+      padding: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 16px 18px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .72));
+    }
+
+    .photo-label {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255, 247, 239, .92);
+    }
+
+    .video-card {
+      position: relative;
+      display: block;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--text);
       background:
-        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.34)),
+        linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .34)),
         url("https://i.ytimg.com/vi/bJnvsR6mxWc/hqdefault.jpg") center/cover no-repeat;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 12px 32px rgba(0,0,0,.25);
+      border: 1px solid rgba(255, 255, 255, .12);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
     }
 
-    .video-overlay{
-      position:absolute;
-      inset:0;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      padding:18px;
-      background:linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.58) 66%, rgba(0,0,0,.78));
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .04), rgba(0, 0, 0, .58) 66%, rgba(0, 0, 0, .78));
     }
 
-    .play-badge{
-      position:absolute;
-      top:16px;
-      left:16px;
-      width:62px;
-      height:62px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.18);
-      backdrop-filter:blur(10px);
-      box-shadow:0 14px 32px rgba(0,0,0,.28);
-    }
-    .play-badge svg{
-      width:24px;
-      height:24px;
-      margin-left:3px;
-      fill:#fff;
+    .play-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .18);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .28);
     }
 
-    .video-kicker{
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      color:rgba(255,247,239,.8);
-      margin:0 0 8px;
-    }
-    .video-title{
-      margin:0 0 8px;
-      font-size:20px;
-      font-weight:800;
-      line-height:1.2;
-    }
-    .video-copy{
-      margin:0;
-      color:rgba(255,247,239,.84);
-      font-size:14px;
-      line-height:1.55;
-      max-width:30ch;
+    .play-badge svg {
+      width: 24px;
+      height: 24px;
+      margin-left: 3px;
+      fill: #fff;
     }
 
-    .invite-form{
-      display:grid;
-      gap:10px;
-      flex:1 1 auto;
-      align-content:start;
-    }
-    .invite-form input{
-      width:100%;
-      min-height:48px;
-      padding:0 15px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.08);
-      color:var(--text);
-      font-size:15px;
-      outline:none;
-      transition:border-color .18s ease, background .18s ease;
-    }
-    .invite-form input::placeholder{color:rgba(255,247,239,.56)}
-    .invite-form input:focus{
-      border-color:rgba(255,211,106,.4);
-      background:rgba(255,255,255,.10);
+    .video-kicker {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: rgba(255, 247, 239, .8);
+      margin: 0 0 8px;
     }
 
-    .submit-btn{
-      min-height:48px;
-      border:0;
-      border-radius:16px;
-      color:#1f0d06;
-      font-size:15px;
-      font-weight:900;
-      cursor:pointer;
-      background:linear-gradient(135deg, #ffd36a, #ff9a4d 52%, #ff6a3d);
-      box-shadow:0 14px 30px rgba(255,106,61,.22);
-      transition:transform .18s ease, filter .18s ease;
+    .video-title {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
     }
+
+    .video-copy {
+      margin: 0;
+      color: rgba(255, 247, 239, .84);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 30ch;
+    }
+
+    .invite-form {
+      display: grid;
+      gap: 10px;
+      flex: 1 1 auto;
+      align-content: start;
+    }
+
+    .invite-form input {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .08);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color .18s ease, background .18s ease;
+    }
+
+    .invite-form input::placeholder {
+      color: rgba(255, 247, 239, .56)
+    }
+
+    .invite-form input:focus {
+      border-color: rgba(255, 211, 106, .4);
+      background: rgba(255, 255, 255, .10);
+    }
+
+    .submit-btn {
+      min-height: 48px;
+      border: 0;
+      border-radius: 16px;
+      color: #1f0d06;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffd36a, #ff9a4d 52%, #ff6a3d);
+      box-shadow: 0 14px 30px rgba(255, 106, 61, .22);
+      transition: transform .18s ease, filter .18s ease;
+    }
+
     .submit-btn:hover,
-    .submit-btn:focus-visible{
-      transform:translateY(-1px);
-      filter:brightness(1.03);
-      outline:none;
-    }
-    .fineprint{
-      margin:0;
-      color:rgba(255,247,239,.64);
-      font-size:12px;
-      line-height:1.5;
+    .submit-btn:focus-visible {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      outline: none;
     }
 
-    .contact-box{
-      margin:auto 0;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      gap:2px;
-      height:100%;
-    }
-    .contact-line{
-      margin:0;
-      font-size:16px;
-      line-height:1.35;
-    }
-    .contact-line a{
-      color:var(--text);
-      text-decoration:none;
-      font-weight:800;
+    .fineprint {
+      margin: 0;
+      color: rgba(255, 247, 239, .64);
+      font-size: 12px;
+      line-height: 1.5;
     }
 
-    .fade{
-      opacity:0;
-      transform:translateY(18px);
-      transition:opacity .6s ease, transform .6s ease;
-    }
-    .fade.visible{
-      opacity:1;
-      transform:translateY(0);
+    .contact-box {
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+      height: 100%;
     }
 
-    .modal{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:22px 14px;
-      background:rgba(0,0,0,.62);
-      backdrop-filter:blur(10px);
-      z-index:1000;
+    .contact-line {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.35;
     }
-    .modal.is-open{display:flex}
-    .modal-card{
-      width:min(720px, 100%);
-      max-height:min(82vh, 860px);
-      background:linear-gradient(180deg, rgba(25,25,25,.96), rgba(10,10,10,.94));
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:26px;
-      box-shadow:0 24px 70px rgba(0,0,0,.55);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
+
+    .contact-line a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
     }
-    .modal-header{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
-      padding:18px 18px 14px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+
+    .fade {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
     }
-    .modal-title{
-      margin:0;
-      font-size:22px;
-      line-height:1.25;
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .modal-subtitle{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 14px;
+      background: rgba(0, 0, 0, .62);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
     }
-    .modal-close{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.08);
-      color:var(--text);
-      display:grid;
-      place-items:center;
-      cursor:pointer;
-      flex:0 0 auto;
-      transition:background .18s ease, transform .18s ease;
+
+    .modal.is-open {
+      display: flex
     }
+
+    .modal-card {
+      width: min(720px, 100%);
+      max-height: min(82vh, 860px);
+      background: linear-gradient(180deg, rgba(25, 25, 25, .96), rgba(10, 10, 10, .94));
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 26px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .modal-subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .08);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: background .18s ease, transform .18s ease;
+    }
+
     .modal-close:hover,
-    .modal-close:focus-visible{
-      background:rgba(255,255,255,.14);
-      transform:scale(1.03);
-      outline:none;
+    .modal-close:focus-visible {
+      background: rgba(255, 255, 255, .14);
+      transform: scale(1.03);
+      outline: none;
     }
-    .modal-close svg{
-      width:18px;
-      height:18px;
-      fill:currentColor;
+
+    .modal-close svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
-    .modal-content{
-      padding:18px;
-      overflow:auto;
+
+    .modal-content {
+      padding: 18px;
+      overflow: auto;
     }
-    .concert-grid{
-      display:grid;
-      gap:12px;
+
+    .concert-grid {
+      display: grid;
+      gap: 12px;
     }
-    .info-box{
-      padding:14px 15px;
-      border-radius:18px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
+
+    .info-box {
+      padding: 14px 15px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
     }
-    .label{
-      display:block;
-      margin-bottom:6px;
-      font-size:11px;
-      font-weight:800;
-      letter-spacing:.09em;
-      color:rgba(255,247,239,.72);
-      text-transform:uppercase;
+
+    .label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      color: rgba(255, 247, 239, .72);
+      text-transform: uppercase;
     }
-    .info-box p{
-      margin:0;
-      font-size:14px;
-      line-height:1.65;
-      color:var(--text);
+
+    .info-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text);
     }
-    .inline-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
+
+    .inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
     }
-    .pill-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-height:42px;
-      padding:0 14px;
-      border-radius:999px;
-      text-decoration:none;
-      color:var(--text);
-      font-size:14px;
-      font-weight:700;
-      background:linear-gradient(180deg, rgba(255,179,92,.18), rgba(255,106,61,.12));
-      border:1px solid rgba(255,211,106,.22);
-      transition:transform .18s ease, filter .18s ease;
+
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      background: linear-gradient(180deg, rgba(255, 179, 92, .18), rgba(255, 106, 61, .12));
+      border: 1px solid rgba(255, 211, 106, .22);
+      transition: transform .18s ease, filter .18s ease;
     }
+
     .pill-link:hover,
-    .pill-link:focus-visible{
-      transform:translateY(-1px);
-      filter:brightness(1.08);
-      outline:none;
+    .pill-link:focus-visible {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+      outline: none;
     }
 
 
-    .site-footer{
-      margin-top:26px;
-      background:transparent;
-      border-top:none;
-      box-shadow:none;
-      border-radius:0;
-      padding:14px 12px 16px;
+    .site-footer {
+      margin-top: 26px;
+      background: transparent;
+      border-top: none;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 14px 12px 16px;
     }
-    .footer-actions{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
+
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .footer-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:42px;
-      padding:0 16px;
-      border-radius:999px;
-      text-decoration:none;
-      color:var(--text);
-      font-size:14px;
-      font-weight:800;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      cursor:pointer;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+
+    .footer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .12);
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
+
     .footer-btn:hover,
-    .footer-btn:focus-visible{
-      background:rgba(255,179,92,.14);
-      border-color:rgba(255,211,106,.34);
-      outline:none;
+    .footer-btn:focus-visible {
+      background: rgba(255, 179, 92, .14);
+      border-color: rgba(255, 211, 106, .34);
+      outline: none;
     }
 
-    .card-modal-overlay{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:22px 14px;
-      background:rgba(0,0,0,.72);
-      backdrop-filter:blur(10px);
-      z-index:1100;
+    .card-modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 14px;
+      background: rgba(0, 0, 0, .72);
+      backdrop-filter: blur(10px);
+      z-index: 1100;
     }
-    .card-modal-overlay.is-open{display:flex}
-    .card-modal-close{
-      position:absolute;
-      top:calc(50% - 250px);
-      right:calc(50% - 160px);
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.10);
-      color:var(--text);
-      display:none;
-      place-items:center;
-      cursor:pointer;
-      z-index:2;
+
+    .card-modal-overlay.is-open {
+      display: flex
     }
-    .card-modal-overlay.revealed .card-modal-close{display:grid}
-    .card-modal-close svg{width:18px;height:18px;fill:currentColor}
-    .oracle-stage{
-      perspective:1200px;
-      width:min(320px, 82vw);
-      height:min(480px, 70vh);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+
+    .card-modal-close {
+      position: absolute;
+      top: calc(50% - 250px);
+      right: calc(50% - 160px);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(255, 255, 255, .10);
+      color: var(--text);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+      z-index: 2;
     }
-    .oracle-card{
-      width:100%;
-      height:100%;
-      position:relative;
-      transform-style:preserve-3d;
-      transition:transform .9s cubic-bezier(.2,.7,.2,1);
-      cursor:pointer;
+
+    .card-modal-overlay.revealed .card-modal-close {
+      display: grid
     }
-    .oracle-card.is-flipped{transform:rotateY(180deg)}
-    .oracle-face{
-      position:absolute;
-      inset:0;
-      border-radius:22px;
-      backface-visibility:hidden;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:0 24px 70px rgba(0,0,0,.45);
+
+    .card-modal-close svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor
     }
-    .oracle-back{
+
+    .oracle-stage {
+      perspective: 1200px;
+      width: min(320px, 82vw);
+      height: min(480px, 70vh);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .oracle-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform .9s cubic-bezier(.2, .7, .2, 1);
+      cursor: pointer;
+    }
+
+    .oracle-card.is-flipped {
+      transform: rotateY(180deg)
+    }
+
+    .oracle-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      backface-visibility: hidden;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+    }
+
+    .oracle-back {
       background:
-        radial-gradient(circle at 50% 50%, rgba(255,215,120,.15), transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 120, .15), transparent 30%),
         linear-gradient(135deg, #111 0%, #191919 38%, #0d0d0d 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .oracle-back::before{
-      content:"";
-      position:absolute;
-      inset:12px;
-      border-radius:16px;
-      border:2px solid rgba(255,215,120,.18);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+
+    .oracle-back::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 215, 120, .18);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
     }
-    .oracle-back::after{
-      content:"✦";
-      font-size:68px;
-      color:rgba(255,215,120,.62);
-      text-shadow:0 0 18px rgba(255,180,70,.25);
+
+    .oracle-back::after {
+      content: "✦";
+      font-size: 68px;
+      color: rgba(255, 215, 120, .62);
+      text-shadow: 0 0 18px rgba(255, 180, 70, .25);
     }
-    .oracle-front{
-      transform:rotateY(180deg);
+
+    .oracle-front {
+      transform: rotateY(180deg);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,240,233,.98));
-      color:#1d140d;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
-      text-align:center;
-    }
-    .oracle-front::before{
-      content:"";
-      position:absolute;
-      inset:12px;
-      border-radius:16px;
-      border:1px solid rgba(60,35,12,.16);
-    }
-    .oracle-text{
-      position:relative;
-      z-index:1;
-      font-size:24px;
-      line-height:1.35;
-      font-weight:700;
-      max-width:12ch;
-      margin:0 auto;
+        linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(244, 240, 233, .98));
+      color: #1d140d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      text-align: center;
     }
 
-    .download-list{
-      display:grid;
-      gap:10px;
-    }
-    .download-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .download-title{
-      margin:0;
-      font-size:14px;
-      line-height:1.4;
-      font-weight:700;
-      color:var(--text);
-    }
-    .download-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      flex:0 0 auto;
-    }
-    .download-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      text-decoration:none;
-      color:var(--text);
-      font-size:13px;
-      font-weight:700;
-      background:linear-gradient(180deg, rgba(255,179,92,.18), rgba(255,106,61,.12));
-      border:1px solid rgba(255,211,106,.22);
+    .oracle-front::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(60, 35, 12, .16);
     }
 
-    @media (max-width:640px){
-      .site-footer{
-        padding:12px 10px 14px;
+    .oracle-text {
+      position: relative;
+      z-index: 1;
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 700;
+      max-width: 12ch;
+      margin: 0 auto;
+    }
+
+    .download-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .download-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .download-title {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .download-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      background: linear-gradient(180deg, rgba(255, 179, 92, .18), rgba(255, 106, 61, .12));
+      border: 1px solid rgba(255, 211, 106, .22);
+    }
+
+    @media (max-width:640px) {
+      .site-footer {
+        padding: 12px 10px 14px;
       }
-      .footer-actions{
-        gap:8px;
+
+      .footer-actions {
+        gap: 8px;
       }
-      .footer-btn{
-        min-height:40px;
-        padding:0 14px;
-        font-size:13px;
+
+      .footer-btn {
+        min-height: 40px;
+        padding: 0 14px;
+        font-size: 13px;
       }
-      .card-modal-close{
-        top:calc(50% - 220px);
-        right:calc(50% - 140px);
+
+      .card-modal-close {
+        top: calc(50% - 220px);
+        right: calc(50% - 140px);
       }
-      .oracle-text{
-        font-size:21px;
+
+      .oracle-text {
+        font-size: 21px;
       }
-      .download-row{
-        flex-direction:column;
-        align-items:flex-start;
+
+      .download-row {
+        flex-direction: column;
+        align-items: flex-start;
       }
-      .download-actions{
-        justify-content:flex-start;
+
+      .download-actions {
+        justify-content: flex-start;
       }
     }
 
 
-    @media (max-width:1100px){
-      .widget{
-        flex-basis:calc(50% - var(--gap));
-        max-width:calc(50% - 9px);
+    @media (max-width:1100px) {
+      .widget {
+        flex-basis: calc(50% - var(--gap));
+        max-width: calc(50% - 9px);
       }
     }
-    @media (max-width:640px){
-      .page{padding:20px 14px 36px}
-      .subtitle{font-size:16px}
-      .subtitle.small{font-size:15px}
-      .nav a{min-width:104px}
-      .widget{
-        flex-basis:100%;
-        max-width:100%;
-        min-width:0;
-        height:auto;
-        min-height:360px;
+
+    @media (max-width:640px) {
+      .page {
+        padding: 20px 14px 36px
       }
-      .video-card{min-height:280px}
-      .modal-card{max-height:88vh}
+
+      .subtitle {
+        font-size: 16px
+      }
+
+      .subtitle.small {
+        font-size: 15px
+      }
+
+      .nav a {
+        min-width: 104px
+      }
+
+      .widget {
+        flex-basis: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 360px;
+      }
+
+      .video-card {
+        min-height: 280px
+      }
+
+      .modal-card {
+        max-height: 88vh
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="page">
     <main class="shell">
@@ -1067,24 +1213,44 @@
         <p class="subtitle">folk fusion kapela s autorskou tvorbou</p>
 
         <div class="social-row" aria-label="Odkazy kapely">
-          <a class="social-link" href="https://soundcloud.com/hackaton" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.64 7.6a4.58 4.58 0 0 1 4.44 3.56 3.49 3.49 0 0 1 1.14-.19 3.66 3.66 0 0 1 3.65 3.66A3.66 3.66 0 0 1 15.22 18H4.87a2.87 2.87 0 0 1-.2-5.73V8.7a.55.55 0 0 1 1.1 0V18h1.26V7.37a.56.56 0 0 1 .56-.56.56.56 0 0 1 .56.56V18h1.26V7.05a.55.55 0 0 1 1.1 0V18h1.25V7.6a.55.55 0 1 1 1.1 0V18h2.56a2.56 2.56 0 0 0 0-5.12 2.47 2.47 0 0 0-1.2.31l-.9.5-.17-1.02A3.46 3.46 0 0 0 9.64 8.7Z"/></svg>
+          <a class="social-link" href="https://soundcloud.com/hackaton" target="_blank" rel="noopener noreferrer"
+            aria-label="SoundCloud">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M9.64 7.6a4.58 4.58 0 0 1 4.44 3.56 3.49 3.49 0 0 1 1.14-.19 3.66 3.66 0 0 1 3.65 3.66A3.66 3.66 0 0 1 15.22 18H4.87a2.87 2.87 0 0 1-.2-5.73V8.7a.55.55 0 0 1 1.1 0V18h1.26V7.37a.56.56 0 0 1 .56-.56.56.56 0 0 1 .56.56V18h1.26V7.05a.55.55 0 0 1 1.1 0V18h1.25V7.6a.55.55 0 1 1 1.1 0V18h2.56a2.56 2.56 0 0 0 0-5.12 2.47 2.47 0 0 0-1.2.31l-.9.5-.17-1.02A3.46 3.46 0 0 0 9.64 8.7Z" />
+            </svg>
           </a>
 
-          <a class="social-link" href="https://open.spotify.com/artist/40cPmFnefeCvmpri2yeCX2?si=935q_W8bQ2S_q8AFspWZiw" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5A10.5 10.5 0 1 0 22.5 12 10.51 10.51 0 0 0 12 1.5Zm4.76 15.13a.88.88 0 0 1-1.22.29 8.76 8.76 0 0 0-8.22-.8.88.88 0 1 1-.66-1.63 10.51 10.51 0 0 1 9.85.97.88.88 0 0 1 .25 1.17Zm1.74-2.82a1.1 1.1 0 0 1-1.51.36 10.94 10.94 0 0 0-10.42-.99 1.1 1.1 0 0 1-.9-2.01 13.15 13.15 0 0 1 12.48 1.18 1.1 1.1 0 0 1 .35 1.46Zm.15-3.08a1.32 1.32 0 0 1-1.79.44 13.13 13.13 0 0 0-12.76-1.13 1.32 1.32 0 0 1-1.04-2.42 15.76 15.76 0 0 1 15.34 1.34 1.32 1.32 0 0 1 .25 1.77Z"/></svg>
+          <a class="social-link" href="https://open.spotify.com/artist/40cPmFnefeCvmpri2yeCX2?si=935q_W8bQ2S_q8AFspWZiw"
+            target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 1.5A10.5 10.5 0 1 0 22.5 12 10.51 10.51 0 0 0 12 1.5Zm4.76 15.13a.88.88 0 0 1-1.22.29 8.76 8.76 0 0 0-8.22-.8.88.88 0 1 1-.66-1.63 10.51 10.51 0 0 1 9.85.97.88.88 0 0 1 .25 1.17Zm1.74-2.82a1.1 1.1 0 0 1-1.51.36 10.94 10.94 0 0 0-10.42-.99 1.1 1.1 0 0 1-.9-2.01 13.15 13.15 0 0 1 12.48 1.18 1.1 1.1 0 0 1 .35 1.46Zm.15-3.08a1.32 1.32 0 0 1-1.79.44 13.13 13.13 0 0 0-12.76-1.13 1.32 1.32 0 0 1-1.04-2.42 15.76 15.76 0 0 1 15.34 1.34 1.32 1.32 0 0 1 .25 1.77Z" />
+            </svg>
           </a>
 
-          <a class="social-link" href="https://www.instagram.com/hackaton_band/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7Zm4.5 3.2A5 5 0 1 1 7 12a5 5 0 0 1 5-5Zm0 1.8A3.2 3.2 0 1 0 15.2 12 3.2 3.2 0 0 0 12 8.8Zm5.3-2.2a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2Z"/></svg>
+          <a class="social-link" href="https://www.instagram.com/hackaton_band/" target="_blank"
+            rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7Zm4.5 3.2A5 5 0 1 1 7 12a5 5 0 0 1 5-5Zm0 1.8A3.2 3.2 0 1 0 15.2 12 3.2 3.2 0 0 0 12 8.8Zm5.3-2.2a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2Z" />
+            </svg>
           </a>
 
-          <a class="social-link" href="https://www.facebook.com/hackatonMusicBand" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 21.5v-8.18h2.75l.41-3.19H13.4V8.09c0-.92.25-1.55 1.58-1.55h1.69V3.69a22.87 22.87 0 0 0-2.47-.13c-2.44 0-4.11 1.49-4.11 4.23v2.34H7.33v3.19h2.76v8.18Z"/></svg>
+          <a class="social-link" href="https://www.facebook.com/hackatonMusicBand" target="_blank"
+            rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M13.4 21.5v-8.18h2.75l.41-3.19H13.4V8.09c0-.92.25-1.55 1.58-1.55h1.69V3.69a22.87 22.87 0 0 0-2.47-.13c-2.44 0-4.11 1.49-4.11 4.23v2.34H7.33v3.19h2.76v8.18Z" />
+            </svg>
           </a>
 
-          <a class="social-link" href="https://www.youtube.com/@hackatonofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.08a2.9 2.9 0 0 0-2.04-2.05C19.16 4.5 12 4.5 12 4.5s-7.16 0-8.96.53A2.9 2.9 0 0 0 1 7.08 30.22 30.22 0 0 0 .5 12 30.22 30.22 0 0 0 1 16.92a2.9 2.9 0 0 0 2.04 2.05C4.84 19.5 12 19.5 12 19.5s7.16 0 8.96-.53A2.9 2.9 0 0 0 23 16.92 30.22 30.22 0 0 0 23.5 12 30.22 30.22 0 0 0 23 7.08ZM9.7 15.14V8.86L15.45 12Z"/></svg>
+          <a class="social-link" href="https://www.youtube.com/@hackatonofficial" target="_blank"
+            rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M23 7.08a2.9 2.9 0 0 0-2.04-2.05C19.16 4.5 12 4.5 12 4.5s-7.16 0-8.96.53A2.9 2.9 0 0 0 1 7.08 30.22 30.22 0 0 0 .5 12 30.22 30.22 0 0 0 1 16.92a2.9 2.9 0 0 0 2.04 2.05C4.84 19.5 12 19.5 12 19.5s7.16 0 8.96-.53A2.9 2.9 0 0 0 23 16.92 30.22 30.22 0 0 0 23.5 12 30.22 30.22 0 0 0 23 7.08ZM9.7 15.14V8.86L15.45 12Z" />
+            </svg>
           </a>
         </div>
 
@@ -1096,25 +1262,28 @@
           <a href="#hudba">Hudba</a>
           <a href="#clenove">Členové</a>
           <a href="#fotka">Fotka</a>
-          <a href="#pozvanky">Pozvánky</a>
-          <a href="#zpevnik">Zpěvník</a>
+          <a href="#pozvanky">Dejte mi vědět</a>
+          <a href="#zpevnik">Tvorba</a>
           <a href="#kontakt">Kontakt</a>
           <a href="#organizatori">Pro organizátory</a>
         </nav>
       </header>
 
       <section class="widgets">
-<section id="koncerty" class="widget fade">
+        <section id="koncerty" class="widget fade">
           <h2 class="widget-title">Koncerty</h2>
           <div class="widget-body">
             <div class="stack fill">
               <button class="concert-button" type="button" data-modal-target="concert-kostelec">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
-                    <span class="concert-badge">Nejbližší koncert</span><p class="concert-title">10. 4. 2026 | Klub Barák</p>
+                    <span class="concert-badge">Nejbližší koncert</span>
+                    <p class="concert-title">10. 4. 2026 | Klub Barák</p>
                     <p class="concert-desc">Kostelec n. Č. l. • DJ John Lenin</p>
                   </div>
                 </div>
@@ -1124,7 +1293,9 @@
               <button class="concert-button" type="button" data-modal-target="concert-kutnahora">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">23. 4. 2026 | Hudební klub Česká 1</p>
@@ -1137,7 +1308,9 @@
               <button class="concert-button" type="button" data-modal-target="concert-kamina">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">7. 5. 2026 | Kamina Boat</p>
@@ -1150,7 +1323,9 @@
               <button class="concert-button" type="button" data-modal-target="concert-vaclavak">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">13. 5. 2026 | Den proti rakovině</p>
@@ -1163,7 +1338,9 @@
               <button class="concert-button" type="button" data-modal-target="concert-kastan">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">17. 6. 2026 | Kaštan – Scéna Unijazzu</p>
@@ -1175,32 +1352,39 @@
             </div>
           </div>
         </section>
-<section id="video" class="widget fade">
+        <section id="video" class="widget fade">
           <h2 class="widget-title">Video</h2>
           <div class="widget-body">
             <div class="push-bottom" style="display:flex; flex:1 1 auto;">
-            <a class="video-card" href="https://youtu.be/bJnvsR6mxWc?si=ELQHXsW64oVRIUSu" target="_blank" rel="noopener noreferrer" aria-label="Přehrát nejnovější koncert Hackatónu na YouTube">
-              <div class="play-badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 5.14v13.72l11-6.86Z"/></svg>
-              </div>
-              <div class="video-overlay">
-                <p class="video-kicker">Nejnovější koncert</p>
-                <h3 class="video-title">Přehrát video na YouTube</h3>
-                <p class="video-copy">Kliknutím otevřeš koncert přímo na YouTube v nové kartě.</p>
-              </div>
-            </a>
+              <a class="video-card" href="https://youtu.be/bJnvsR6mxWc?si=ELQHXsW64oVRIUSu" target="_blank"
+                rel="noopener noreferrer" aria-label="Přehrát nejnovější koncert Hackatónu na YouTube">
+                <div class="play-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5.14v13.72l11-6.86Z" />
+                  </svg>
+                </div>
+                <div class="video-overlay">
+                  <p class="video-kicker">Nejnovější koncert</p>
+                  <h3 class="video-title">Přehrát video na YouTube</h3>
+                  <p class="video-copy">Kliknutím otevřeš koncert přímo na YouTube v nové kartě.</p>
+                </div>
+              </a>
             </div>
           </div>
         </section>
-<section id="hudba" class="widget fade">
+        <section id="hudba" class="widget fade">
           <h2 class="widget-title">Hudba</h2>
           <div class="widget-body">
-            <p class="muted">Všechny naše nahrávky na jednom místě, několik ukázek na Spotify a nejnovější song Skleněnky.</p>
+            <p class="muted">Všechny naše nahrávky na jednom místě, několik ukázek na Spotify a nejnovější song
+              Skleněnky.</p>
             <div class="stack fill push-bottom">
               <a class="action-link" href="https://soundcloud.com/hackaton" target="_blank" rel="noopener noreferrer">
                 <div class="action-left">
                   <div class="action-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M9.64 7.6a4.58 4.58 0 0 1 4.44 3.56 3.49 3.49 0 0 1 1.14-.19 3.66 3.66 0 0 1 3.65 3.66A3.66 3.66 0 0 1 15.22 18H4.87a2.87 2.87 0 0 1-.2-5.73V8.7a.55.55 0 0 1 1.1 0V18h1.26V7.37a.56.56 0 0 1 .56-.56.56.56 0 0 1 .56.56V18h1.26V7.05a.55.55 0 0 1 1.1 0V18h1.25V7.6a.55.55 0 1 1 1.1 0V18h2.56a2.56 2.56 0 0 0 0-5.12 2.47 2.47 0 0 0-1.2.31l-.9.5-.17-1.02A3.46 3.46 0 0 0 9.64 8.7Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M9.64 7.6a4.58 4.58 0 0 1 4.44 3.56 3.49 3.49 0 0 1 1.14-.19 3.66 3.66 0 0 1 3.65 3.66A3.66 3.66 0 0 1 15.22 18H4.87a2.87 2.87 0 0 1-.2-5.73V8.7a.55.55 0 0 1 1.1 0V18h1.26V7.37a.56.56 0 0 1 .56-.56.56.56 0 0 1 .56.56V18h1.26V7.05a.55.55 0 0 1 1.1 0V18h1.25V7.6a.55.55 0 1 1 1.1 0V18h2.56a2.56 2.56 0 0 0 0-5.12 2.47 2.47 0 0 0-1.2.31l-.9.5-.17-1.02A3.46 3.46 0 0 0 9.64 8.7Z" />
+                    </svg>
                   </div>
                   <div class="action-text">
                     <p class="action-title">SoundCloud</p>
@@ -1210,10 +1394,15 @@
                 <span aria-hidden="true">→</span>
               </a>
 
-              <a class="action-link" href="https://open.spotify.com/artist/40cPmFnefeCvmpri2yeCX2?si=935q_W8bQ2S_q8AFspWZiw" target="_blank" rel="noopener noreferrer">
+              <a class="action-link"
+                href="https://open.spotify.com/artist/40cPmFnefeCvmpri2yeCX2?si=935q_W8bQ2S_q8AFspWZiw" target="_blank"
+                rel="noopener noreferrer">
                 <div class="action-left">
                   <div class="action-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 1.5A10.5 10.5 0 1 0 22.5 12 10.51 10.51 0 0 0 12 1.5Zm4.76 15.13a.88.88 0 0 1-1.22.29 8.76 8.76 0 0 0-8.22-.8.88.88 0 1 1-.66-1.63 10.51 10.51 0 0 1 9.85.97.88.88 0 0 1 .25 1.17Zm1.74-2.82a1.1 1.1 0 0 1-1.51.36 10.94 10.94 0 0 0-10.42-.99 1.1 1.1 0 0 1-.9-2.01 13.15 13.15 0 0 1 12.48 1.18 1.1 1.1 0 0 1 .35 1.46Zm.15-3.08a1.32 1.32 0 0 1-1.79.44 13.13 13.13 0 0 0-12.76-1.13 1.32 1.32 0 0 1-1.04-2.42 15.76 15.76 0 0 1 15.34 1.34 1.32 1.32 0 0 1 .25 1.77Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 1.5A10.5 10.5 0 1 0 22.5 12 10.51 10.51 0 0 0 12 1.5Zm4.76 15.13a.88.88 0 0 1-1.22.29 8.76 8.76 0 0 0-8.22-.8.88.88 0 1 1-.66-1.63 10.51 10.51 0 0 1 9.85.97.88.88 0 0 1 .25 1.17Zm1.74-2.82a1.1 1.1 0 0 1-1.51.36 10.94 10.94 0 0 0-10.42-.99 1.1 1.1 0 0 1-.9-2.01 13.15 13.15 0 0 1 12.48 1.18 1.1 1.1 0 0 1 .35 1.46Zm.15-3.08a1.32 1.32 0 0 1-1.79.44 13.13 13.13 0 0 0-12.76-1.13 1.32 1.32 0 0 1-1.04-2.42 15.76 15.76 0 0 1 15.34 1.34 1.32 1.32 0 0 1 .25 1.77Z" />
+                    </svg>
                   </div>
                   <div class="action-text">
                     <p class="action-title">Spotify</p>
@@ -1223,10 +1412,13 @@
                 <span aria-hidden="true">→</span>
               </a>
 
-              <a class="song-link" href="https://soundcloud.com/hackaton/sklenenky-17" target="_blank" rel="noopener noreferrer">
+              <a class="song-link" href="https://soundcloud.com/hackaton/sklenenky-17" target="_blank"
+                rel="noopener noreferrer">
                 <div class="action-left">
                   <div class="action-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M8 5.14v13.72l11-6.86Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5.14v13.72l11-6.86Z" />
+                    </svg>
                   </div>
                   <div class="action-text">
                     <p class="action-title">Pustit Skleněnky</p>
@@ -1238,7 +1430,7 @@
             </div>
           </div>
         </section>
-<section id="clenove" class="widget fade">
+        <section id="clenove" class="widget fade">
           <h2 class="widget-title">Členové</h2>
           <div class="widget-body">
             <p class="muted">Klikni na jméno a otevře se detail člena s fotografií a medailonkem.</p>
@@ -1247,7 +1439,10 @@
               <button class="member-button" type="button" data-modal-target="member-pepa">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">Pepa</p>
@@ -1259,7 +1454,10 @@
               <button class="member-button" type="button" data-modal-target="member-adam">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">Adam</p>
@@ -1271,7 +1469,10 @@
               <button class="member-button" type="button" data-modal-target="member-vojta">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">Vojta</p>
@@ -1283,7 +1484,10 @@
               <button class="member-button" type="button" data-modal-target="member-standa">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">Standa</p>
@@ -1295,7 +1499,10 @@
               <button class="member-button" type="button" data-modal-target="member-tom">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">Tomáš</p>
@@ -1307,7 +1514,10 @@
               <button class="member-button" type="button" data-modal-target="member-vojt-ch">
                 <div class="concert-left">
                   <div class="concert-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.01-8 4.5V21h16v-2.5c0-2.49-3.58-4.5-8-4.5Z" />
+                    </svg>
                   </div>
                   <div class="concert-text">
                     <p class="concert-title">Vojtěch</p>
@@ -1319,24 +1529,28 @@
             </div>
           </div>
         </section>
-<section id="fotka" class="widget fade">
-              <h2 class="widget-title">Fotka</h2>
-              <div class="widget-body">
-                <div class="push-bottom" style="display:flex; flex:1 1 auto;">
-                  <button class="photo-card photo-button" type="button" id="photo-widget-button" aria-label="Zobrazit další fotografii kapely">
-                    <img id="random-photo" src="/photos/1.jpg" alt="Fotka kapely Hackaton" />
-                    <div class="photo-overlay">
-                      <p class="photo-label">Klikni pro další momentku Hackatonu</p>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </section>
-<section id="pozvanky" class="widget fade">
-          <h2 class="widget-title">Pozvánky</h2>
+        <section id="fotka" class="widget fade">
+          <h2 class="widget-title">Fotka</h2>
           <div class="widget-body">
-            <p class="muted">Chceš vědět o nových termínech včas? Přihlas se k odběru pozvánek a koncertní novinky ti přistanou rovnou do mailu.</p>
-            <form class="invite-form fill" action="https://hackaton.us17.list-manage.com/subscribe/post?u=15ab5b23c204636d9ea84863e&amp;id=a748f24031&amp;f_id=00b56ce0f0" method="post" target="_blank" novalidate>
+            <div class="push-bottom" style="display:flex; flex:1 1 auto;">
+              <button class="photo-card photo-button" type="button" id="photo-widget-button"
+                aria-label="Zobrazit další fotografii kapely">
+                <img id="random-photo" src="/photos/1.jpg" alt="Fotka kapely Hackaton" />
+                <div class="photo-overlay">
+                  <p class="photo-label">Klikni pro další momentku Hackatonu</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </section>
+        <section id="pozvanky" class="widget fade">
+          <h2 class="widget-title">Dejte mi vědět</h2>
+          <div class="widget-body">
+            <p class="muted">Chceš vědět o nových termínech včas? Přihlas se k odběru pozvánek a koncertní novinky ti
+              přistanou rovnou do mailu.</p>
+            <form class="invite-form fill"
+              action="https://hackaton.us17.list-manage.com/subscribe/post?u=15ab5b23c204636d9ea84863e&amp;id=a748f24031&amp;f_id=00b56ce0f0"
+              method="post" target="_blank" novalidate>
               <input type="email" name="EMAIL" placeholder="Tvůj e-mail *" required />
               <input type="text" name="FNAME" placeholder="Jméno (nepovinné)" />
               <input type="text" name="LNAME" placeholder="Příjmení (nepovinné)" />
@@ -1348,15 +1562,29 @@
             <p class="fineprint">Po odeslání se otevře potvrzení odběru v nové kartě.</p>
           </div>
         </section>
-<section id="zpevnik" class="widget fade">
-          <h2 class="widget-title">Zpěvník</h2>
+        <section id="zpevnik" class="widget fade">
+          <h2 class="widget-title">Tvorba</h2>
           <div class="widget-body">
-            <p class="muted">Veřejný zpěvník otevřeš jedním klikem v nové kartě.</p>
+            <p class="contact-line" style="font-weight:700;">
+              Co se stane, když parta ajťáků zavře notebooky?<br>
+              Vznikne <strong>Hackaton</strong> – pražská kapela hrající původní autorský folk‑rock & pop.
+            </p>
+
+            <p class="contact-line" style="font-size:14px; opacity:.9;">
+              Naše hudba stojí na silných českých textech a pestrých aranžích,
+              kde se akustická kytara potkává s výraznými klávesami a sólovou elektrikou.
+              V našem setlistu uslyšíte balady, svižnější písně i vtipné glosování života.
+            </p>
             <div class="stack fill push-bottom">
-              <a class="action-link" href="https://docs.google.com/document/d/124YEv8F7yq-af6-tyPWxcKyQ8Se-q5CM6Of5_dtopZo/edit?tab=t.atd77s5m3ytb" target="_blank" rel="noopener noreferrer">
+              <a class="action-link"
+                href="https://docs.google.com/document/d/124YEv8F7yq-af6-tyPWxcKyQ8Se-q5CM6Of5_dtopZo/edit?tab=t.atd77s5m3ytb"
+                target="_blank" rel="noopener noreferrer">
                 <div class="action-left">
                   <div class="action-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M6 2.5h8.5L20 8v13.5H6a2 2 0 0 1-2-2V4.5a2 2 0 0 1 2-2Zm8 1.8v4.4h4.4ZM8 11h8v1.8H8Zm0 4h8v1.8H8Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M6 2.5h8.5L20 8v13.5H6a2 2 0 0 1-2-2V4.5a2 2 0 0 1 2-2Zm8 1.8v4.4h4.4ZM8 11h8v1.8H8Zm0 4h8v1.8H8Z" />
+                    </svg>
                   </div>
                   <div class="action-text">
                     <p class="action-title">Otevřít veřejný zpěvník</p>
@@ -1368,41 +1596,35 @@
             </div>
           </div>
         </section>
-<section id="kontakt" class="widget fade">
+        <section id="kontakt" class="widget fade">
           <h2 class="widget-title">Kontakt</h2>
           <div class="widget-body">
             <div class="contact-box" style="gap:10px; max-width:420px; margin:auto;">
-              <p class="contact-line" style="font-weight:700;">
-                Co se stane, když parta ajťáků zavře notebooky?<br>
-                Vznikne <strong>Hackaton</strong> – pražská kapela hrající původní autorský folk‑rock & pop.
-              </p>
-
-              <p class="contact-line" style="font-size:14px; opacity:.9;">
-                Naše hudba stojí na silných českých textech a pestrých aranžích, 
-                kde se akustická kytara potkává s výraznými klávesami a sólovou elektrikou. 
-                V našem setlistu uslyšíte balady, svižnější písně i vtipné glosování života.
-              </p>
-
               <p class="contact-line" style="margin-top:6px;">
                 <a href="mailto:info@hackaton.cz">info@hackaton.cz</a><br>
                 <a href="tel:+420724826951">+420 724 826 951</a><br>
                 Josef Bukovský
               </p>
-            <p class="contact-line" style="margin-top:6px;">
-              Fotografie: <a href="https://www.vojtechvlk.com/" target="_blank" rel="noopener noreferrer">&copy; Vojtěch Vlk</a> a kapela
-            </p>
+              <p class="contact-line" style="margin-top:6px;">
+                Fotografie: <a href="https://www.vojtechvlk.com/" target="_blank" rel="noopener noreferrer">&copy;
+                  Vojtěch Vlk</a> a kapela
+              </p>
             </div>
           </div>
         </section>
-<section id="organizatori" class="widget fade">
+        <section id="organizatori" class="widget fade">
           <h2 class="widget-title">Pro organizátory</h2>
           <div class="widget-body">
-            <p class="muted">Připravili jsme stručný technický rider se základními požadavky na nazvučení kapely a přípravu stage.</p>
+            <p class="muted">Připravili jsme stručný technický rider se základními požadavky na nazvučení kapely a
+              přípravu stage.</p>
             <div class="stack fill push-bottom">
               <a class="action-link" href="downloads/rider-hackaton-2026.pdf" target="_blank" rel="noopener noreferrer">
                 <div class="action-left">
                   <div class="action-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M6 2.5h8.5L20 8v13.5H6a2 2 0 0 1-2-2V4.5a2 2 0 0 1 2-2Zm8 1.8v4.4h4.4ZM8 11h8v1.8H8Zm0 4h8v1.8H8Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M6 2.5h8.5L20 8v13.5H6a2 2 0 0 1-2-2V4.5a2 2 0 0 1 2-2Zm8 1.8v4.4h4.4ZM8 11h8v1.8H8Zm0 4h8v1.8H8Z" />
+                    </svg>
                   </div>
                   <div class="action-text">
                     <p class="action-title">Technický rider 2026</p>
@@ -1414,27 +1636,30 @@
             </div>
           </div>
         </section>
-      <footer class="site-footer">
-        <div class="footer-actions">
-          <button class="footer-btn" type="button" id="open-oracle-btn">Dej mi kartičku</button>
-          <a class="footer-btn" href="https://www.hackaton.cz/game" target="_blank" rel="noopener noreferrer">Hra</a>
-          <button class="footer-btn" type="button" id="open-downloads-btn">Ke stažení</button>
-        </div>
-      </footer>
+        <footer class="site-footer">
+          <div class="footer-actions">
+            <button class="footer-btn" type="button" id="open-oracle-btn">Dej mi kartičku</button>
+            <a class="footer-btn" href="https://www.hackaton.cz/game" target="_blank" rel="noopener noreferrer">Hra</a>
+            <button class="footer-btn" type="button" id="open-downloads-btn">Ke stažení</button>
+          </div>
+        </footer>
 
-      <div class="card-modal-overlay" id="oracle-modal" aria-hidden="true">
-        <button class="card-modal-close" type="button" id="oracle-close" aria-label="Zavřít kartičku">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z"/></svg>
-        </button>
-        <div class="oracle-stage">
-          <div class="oracle-card" id="oracle-card" role="button" tabindex="0" aria-label="Otočit kartičku">
-            <div class="oracle-face oracle-back"></div>
-            <div class="oracle-face oracle-front">
-              <p class="oracle-text" id="oracle-text"></p>
+        <div class="card-modal-overlay" id="oracle-modal" aria-hidden="true">
+          <button class="card-modal-close" type="button" id="oracle-close" aria-label="Zavřít kartičku">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z" />
+            </svg>
+          </button>
+          <div class="oracle-stage">
+            <div class="oracle-card" id="oracle-card" role="button" tabindex="0" aria-label="Otočit kartičku">
+              <div class="oracle-face oracle-back"></div>
+              <div class="oracle-face oracle-front">
+                <p class="oracle-text" id="oracle-text"></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
     </main>
   </div>
@@ -1447,7 +1672,10 @@
           <p class="modal-subtitle" id="modal-subtitle"></p>
         </div>
         <button class="modal-close" type="button" aria-label="Zavřít">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z" />
+          </svg>
         </button>
       </div>
       <div class="modal-content" id="modal-content"></div>
@@ -1463,151 +1691,180 @@
           <p class="modal-subtitle">Vyber si písničku. Můžeš ji rovnou pustit nebo stáhnout.</p>
         </div>
         <button class="modal-close" type="button" aria-label="Zavřít">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z" />
+          </svg>
         </button>
       </div>
       <div class="modal-content">
         <div class="download-list">
-            <div class="download-row">
-              <p class="download-title">Nebeský zatáčky</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" download>Stáhnout</a>
-              </div>
+          <div class="download-row">
+            <p class="download-title">Nebeský zatáčky</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Co jsme víc</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/02-Co%20jsme%20vi%CC%81c.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/02-Co%20jsme%20vi%CC%81c.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Co jsme víc</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/02-Co%20jsme%20vi%CC%81c.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/02-Co%20jsme%20vi%CC%81c.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Modlitba za vděčnost</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Modlitba za vděčnost</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Gabriela</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/04-Gabriela.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/04-Gabriela.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Gabriela</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/04-Gabriela.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/04-Gabriela.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Zima</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/05-Zima.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/05-Zima.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Zima</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/05-Zima.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/05-Zima.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Návrat z války</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Návrat z války</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Kmotřička Smrt</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Kmotřička Smrt</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Armáda snílků</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Armáda snílků</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Na obláčku</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Na obláčku</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Saganův sen o bleděmodré tečce</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Saganův sen o bleděmodré tečce</p>
+            <div class="download-actions">
+              <a class="download-link"
+                href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link"
+                href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3"
+                download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Srdce jako zvon</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/11-Srdce%20jako%20zvon.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/11-Srdce%20jako%20zvon.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Srdce jako zvon</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/11-Srdce%20jako%20zvon.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/11-Srdce%20jako%20zvon.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Výletnická I</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Výletnická I</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Chvála bláznovství</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Chvála bláznovství</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Krysař</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/14-Krysar%CC%8C.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/14-Krysar%CC%8C.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Krysař</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/14-Krysar%CC%8C.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/14-Krysar%CC%8C.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Vzteklej Ben</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/15-Vzteklej%20Ben.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/15-Vzteklej%20Ben.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Vzteklej Ben</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/15-Vzteklej%20Ben.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/15-Vzteklej%20Ben.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Kavárna lepší časy</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Kavárna lepší časy</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3"
+                target="_blank" rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3"
+                download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Skleněnky</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/17-Sklene%CC%8Cnky.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/17-Sklene%CC%8Cnky.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Skleněnky</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/17-Sklene%CC%8Cnky.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/17-Sklene%CC%8Cnky.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Peacenička+Skříně nápadů</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Peacenička+Skříně nápadů</p>
+            <div class="download-actions">
+              <a class="download-link"
+                href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link"
+                href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3"
+                download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Dovolená</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/19-Dovolena%CC%81.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/19-Dovolena%CC%81.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Dovolená</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/19-Dovolena%CC%81.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/19-Dovolena%CC%81.mp3" download>Stáhnout</a>
             </div>
-            <div class="download-row">
-              <p class="download-title">Charakter</p>
-              <div class="download-actions">
-                <a class="download-link" href="/songs/20-Charakter.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
-                <a class="download-link" href="/songs/20-Charakter.mp3" download>Stáhnout</a>
-              </div>
+          </div>
+          <div class="download-row">
+            <p class="download-title">Charakter</p>
+            <div class="download-actions">
+              <a class="download-link" href="/songs/20-Charakter.mp3" target="_blank"
+                rel="noopener noreferrer">Přehrát</a>
+              <a class="download-link" href="/songs/20-Charakter.mp3" download>Stáhnout</a>
             </div>
+          </div>
         </div>
         <div style="margin-top:16px; text-align:center;">
           <a class="download-link" href="/songs/songs.zip" download style="font-size:14px; padding:10px 18px;">
@@ -1620,7 +1877,8 @@
 
 
   <template id="concert-kostelec">
-    <div data-title="10. 4. 2026 | Klub Barák | Kostelec nad Černými lesy" data-subtitle="Pátek • start 20:30 • host DJ John Lenin">
+    <div data-title="10. 4. 2026 | Klub Barák | Kostelec nad Černými lesy"
+      data-subtitle="Pátek • start 20:30 • host DJ John Lenin">
       <div class="concert-grid">
         <div class="info-box">
           <span class="label">Kdy</span>
@@ -1632,11 +1890,14 @@
         </div>
         <div class="info-box">
           <span class="label">Jak se tam dostaneš</span>
-          <p>Nejjednodušší je zadat do map „Klub Barák, náměstí Smiřických 79, Kostelec nad Černými lesy“. Místo si otevřeš jedním klikem v mapě níže.</p>
+          <p>Nejjednodušší je zadat do map „Klub Barák, náměstí Smiřických 79, Kostelec nad Černými lesy“. Místo si
+            otevřeš jedním klikem v mapě níže.</p>
         </div>
         <div class="info-box">
           <span class="label">Co tě čeká</span>
-          <p>První letošní koncert odehrajeme v pátek 10. dubna v Klubu Barák. Po našem setu ve 22:00 naváže místní vinylový král DJ John Lenin / DJ Silvester Stalline a postará se o pokračování pohodové písničkové atmosféry svou vinyl only diskotékou.</p>
+          <p>První letošní koncert odehrajeme v pátek 10. dubna v Klubu Barák. Po našem setu ve 22:00 naváže místní
+            vinylový král DJ John Lenin / DJ Silvester Stalline a postará se o pokračování pohodové písničkové atmosféry
+            svou vinyl only diskotékou.</p>
         </div>
         <div class="info-box">
           <span class="label">Facebook událost</span>
@@ -1644,13 +1905,16 @@
         </div>
       </div>
       <div class="inline-links">
-        <a class="pill-link" href="https://www.google.com/maps/search/?api=1&query=Klub+Bar%C3%A1k,+n%C3%A1m%C4%9Bst%C3%AD+Smi%C5%99ick%C3%BDch+79,+Kostelec+nad+%C4%8Cern%C3%BDmi+lesy" target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+        <a class="pill-link"
+          href="https://www.google.com/maps/search/?api=1&query=Klub+Bar%C3%A1k,+n%C3%A1m%C4%9Bst%C3%AD+Smi%C5%99ick%C3%BDch+79,+Kostelec+nad+%C4%8Cern%C3%BDmi+lesy"
+          target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
       </div>
     </div>
   </template>
 
   <template id="concert-kutnahora">
-    <div data-title="23. 4. 2026 | Hudební klub Česká 1 | Kutná Hora" data-subtitle="Čtvrtek • host Zavětrem • Facebook událost k dispozici">
+    <div data-title="23. 4. 2026 | Hudební klub Česká 1 | Kutná Hora"
+      data-subtitle="Čtvrtek • host Zavětrem • Facebook událost k dispozici">
       <div class="concert-grid">
         <div class="info-box">
           <span class="label">Kdy</span>
@@ -1666,7 +1930,8 @@
         </div>
         <div class="info-box">
           <span class="label">Co tě čeká</span>
-          <p>Hackatón vyráží poprvé na Kutnohorsko a Zavětrem se vrací na pódium po delší pauze. Zavětrem dorazí v komornější akustické sestavě s důrazem na texty, atmosféru a autorský folk.</p>
+          <p>Hackatón vyráží poprvé na Kutnohorsko a Zavětrem se vrací na pódium po delší pauze. Zavětrem dorazí v
+            komornější akustické sestavě s důrazem na texty, atmosféru a autorský folk.</p>
         </div>
         <div class="info-box">
           <span class="label">Facebook událost</span>
@@ -1674,8 +1939,11 @@
         </div>
       </div>
       <div class="inline-links">
-        <a class="pill-link" href="https://www.google.com/maps/search/?api=1&query=Hudebn%C3%AD+klub+%C4%8Cesk%C3%A1+1,+Kutn%C3%A1+Hora" target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
-        <a class="pill-link" href="https://www.facebook.com/events/1280919393944677" target="_blank" rel="noopener noreferrer">Facebook událost</a>
+        <a class="pill-link"
+          href="https://www.google.com/maps/search/?api=1&query=Hudebn%C3%AD+klub+%C4%8Cesk%C3%A1+1,+Kutn%C3%A1+Hora"
+          target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+        <a class="pill-link" href="https://www.facebook.com/events/1280919393944677" target="_blank"
+          rel="noopener noreferrer">Facebook událost</a>
       </div>
     </div>
   </template>
@@ -1697,7 +1965,8 @@
         </div>
         <div class="info-box">
           <span class="label">Co tě čeká</span>
-          <p>Hackatón se na Kaminu vrací již poněkolikáté a tentokrát s hostem Zavětrem. Čeká tě večer s autorskou muzikou, komornější atmosférou a výhledem z paluby.</p>
+          <p>Hackatón se na Kaminu vrací již poněkolikáté a tentokrát s hostem Zavětrem. Čeká tě večer s autorskou
+            muzikou, komornější atmosférou a výhledem z paluby.</p>
         </div>
         <div class="info-box">
           <span class="label">Facebook událost</span>
@@ -1705,13 +1974,16 @@
         </div>
       </div>
       <div class="inline-links">
-        <a class="pill-link" href="https://www.google.com/maps/search/?api=1&query=Kamina+Boat,+Dvo%C5%99%C3%A1kovo+n%C3%A1b%C5%99e%C5%BE%C3%AD,+molo+16,+Praha" target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+        <a class="pill-link"
+          href="https://www.google.com/maps/search/?api=1&query=Kamina+Boat,+Dvo%C5%99%C3%A1kovo+n%C3%A1b%C5%99e%C5%BE%C3%AD,+molo+16,+Praha"
+          target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
       </div>
     </div>
   </template>
 
   <template id="concert-vaclavak">
-    <div data-title="13. 5. 2026 | Den proti rakovině | Václavské náměstí | Praha" data-subtitle="Středa • benefiční vystoupení">
+    <div data-title="13. 5. 2026 | Den proti rakovině | Václavské náměstí | Praha"
+      data-subtitle="Středa • benefiční vystoupení">
       <div class="concert-grid">
         <div class="info-box">
           <span class="label">Kdy</span>
@@ -1727,7 +1999,8 @@
         </div>
         <div class="info-box">
           <span class="label">Co tě čeká</span>
-          <p>Již potřetí nás oslovili organizátoři benefičního koncertu Ligy proti rakovině, abychom podpořili Den proti rakovině svým vystoupením. Máme z toho velkou radost a na hraní se těšíme.</p>
+          <p>Již potřetí nás oslovili organizátoři benefičního koncertu Ligy proti rakovině, abychom podpořili Den proti
+            rakovině svým vystoupením. Máme z toho velkou radost a na hraní se těšíme.</p>
         </div>
         <div class="info-box">
           <span class="label">Facebook událost</span>
@@ -1735,7 +2008,9 @@
         </div>
       </div>
       <div class="inline-links">
-        <a class="pill-link" href="https://www.google.com/maps/search/?api=1&query=V%C3%A1clavsk%C3%A9+n%C3%A1m%C4%9Bst%C3%AD,+Praha" target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+        <a class="pill-link"
+          href="https://www.google.com/maps/search/?api=1&query=V%C3%A1clavsk%C3%A9+n%C3%A1m%C4%9Bst%C3%AD,+Praha"
+          target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
       </div>
     </div>
   </template>
@@ -1757,7 +2032,8 @@
         </div>
         <div class="info-box">
           <span class="label">Co tě čeká</span>
-          <p>Legendární klub a útočiště alternativních žánrů. Detaily vystoupení ještě připravujeme, ale datum už si rozhodně zapiš.</p>
+          <p>Legendární klub a útočiště alternativních žánrů. Detaily vystoupení ještě připravujeme, ale datum už si
+            rozhodně zapiš.</p>
         </div>
         <div class="info-box">
           <span class="label">Facebook událost</span>
@@ -1765,7 +2041,9 @@
         </div>
       </div>
       <div class="inline-links">
-        <a class="pill-link" href="https://www.google.com/maps/search/?api=1&query=Ka%C5%A1tan+Sc%C3%A9na+Unijazzu,+B%C4%9Blohorsk%C3%A1+150,+Praha" target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+        <a class="pill-link"
+          href="https://www.google.com/maps/search/?api=1&query=Ka%C5%A1tan+Sc%C3%A9na+Unijazzu,+B%C4%9Blohorsk%C3%A1+150,+Praha"
+          target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
       </div>
     </div>
   </template>
@@ -1775,8 +2053,13 @@
     <div data-title="Pepa" data-subtitle="Frontman, kytarista a zpěvák">
       <div class="member-copy">
         <img class="member-photo" src="/members-photo/pepa.jpg" alt="Pepa" />
-        <p>Narodil se do rodiny sovětského důstojníka, který se snažil od malička svému synovi vštípit lásku k tradičnímu hudebnímu nástroji domoviny – ballallajce. To se mu podařilo i díky tomu, že malý Pepíček musel každé ráno vítat hlasitým vykřikováním názvu tohoto trojhranného nástroje. Když se Pepíček dostal mezi jiné děti než důstojnické, objevil západní komiksy a přezdívka byla na světě.</p>
-        <p>Co si rovněž odnesl do života je láska k pochodovým písním. Talent projevoval už v útlém věku, kdy si maminka všimla, že rovná kočárky do vozové hradby a pobrukuje si „Přes spáleniště, přes krvavé řeky…“. Proto i dnes, po letech, je jeho přednes úderný a rázný a posluchače bezděky nutí rovnat záda a dělat vpravo hleď.</p>
+        <p>Narodil se do rodiny sovětského důstojníka, který se snažil od malička svému synovi vštípit lásku k
+          tradičnímu hudebnímu nástroji domoviny – ballallajce. To se mu podařilo i díky tomu, že malý Pepíček musel
+          každé ráno vítat hlasitým vykřikováním názvu tohoto trojhranného nástroje. Když se Pepíček dostal mezi jiné
+          děti než důstojnické, objevil západní komiksy a přezdívka byla na světě.</p>
+        <p>Co si rovněž odnesl do života je láska k pochodovým písním. Talent projevoval už v útlém věku, kdy si maminka
+          všimla, že rovná kočárky do vozové hradby a pobrukuje si „Přes spáleniště, přes krvavé řeky…“. Proto i dnes,
+          po letech, je jeho přednes úderný a rázný a posluchače bezděky nutí rovnat záda a dělat vpravo hleď.</p>
       </div>
     </div>
   </template>
@@ -1784,7 +2067,13 @@
     <div data-title="Adam" data-subtitle="Textař a uvaděč">
       <div class="member-copy">
         <img class="member-photo" src="/members-photo/adam.jpg" alt="Adam" />
-        <p>Adam od školního věku narážel na nepochopení své kreativity, kterou okolí dokazoval svým neustálým brebentěním. Dospělí mu ale vyčítali, že je úplně mimo, a tak se přihlásil do kroužku pro začínající mimy, kde doufal v přijetí od podobně postižených vrstevníků. Jeho umělecká kariéra byla proto celkem trnitá. Později, na střední škole pro zvláště nadané hochy, jakmile se Adam naučil psát, přesměroval mluvení do psaní. A najednou se dostavily první úspěchy, příkladně pěkné umístění v soutěži v těsnopisu. Současný styl psaní písní je ale zejména důsledek Adamovy píle a pracovitosti, kdy se inspiroval známou poučkou o Shakespearových dílech a opicích s psacími stroji.</p>
+        <p>Adam od školního věku narážel na nepochopení své kreativity, kterou okolí dokazoval svým neustálým
+          brebentěním. Dospělí mu ale vyčítali, že je úplně mimo, a tak se přihlásil do kroužku pro začínající mimy, kde
+          doufal v přijetí od podobně postižených vrstevníků. Jeho umělecká kariéra byla proto celkem trnitá. Později,
+          na střední škole pro zvláště nadané hochy, jakmile se Adam naučil psát, přesměroval mluvení do psaní. A
+          najednou se dostavily první úspěchy, příkladně pěkné umístění v soutěži v těsnopisu. Současný styl psaní písní
+          je ale zejména důsledek Adamovy píle a pracovitosti, kdy se inspiroval známou poučkou o Shakespearových dílech
+          a opicích s psacími stroji.</p>
       </div>
     </div>
   </template>
@@ -1792,8 +2081,15 @@
     <div data-title="Vojta" data-subtitle="Famózní klávesista a hlas">
       <div class="member-copy">
         <img class="member-photo" src="/members-photo/vojta.jpg" alt="Vojta" />
-        <p>Malý Vojta své okolí dokonale šokoval, když si z Lega postavil své první varhany, ještě mu nebylo ani tři. V pěti je přestavěl na čtvrttónové a v šesti, jakmile pochopil základy matematiky, začal vybírat vstupné. Rodina si díky tomu mohla dovolit ho poslat studovat na prestižní školu Strýčka Jedličky. Tam zvítězil v soutěži v přednesu, se zvláštním uznáním za schopnost každou sloku pokaždé zahrát jinak. Tuto svoji přednost pak v současné době využívá při hraní s Hackatónem.</p>
-        <p>Jeho specialitou jsou svatební a pohřební marše. Díky nim se také seznámil se Šmoullou. Jeho citlivý sluch vycítí na desítky kilometrů, když se někde v okolí plánuje svatba nebo pohřeb. Šťastní budoucí manželé, případně budoucí šťastní pozůstalí, pak od Vojty dostanou vždy čerstvou nabídku hudebního doprovodu plánované akce.</p>
+        <p>Malý Vojta své okolí dokonale šokoval, když si z Lega postavil své první varhany, ještě mu nebylo ani tři. V
+          pěti je přestavěl na čtvrttónové a v šesti, jakmile pochopil základy matematiky, začal vybírat vstupné. Rodina
+          si díky tomu mohla dovolit ho poslat studovat na prestižní školu Strýčka Jedličky. Tam zvítězil v soutěži v
+          přednesu, se zvláštním uznáním za schopnost každou sloku pokaždé zahrát jinak. Tuto svoji přednost pak v
+          současné době využívá při hraní s Hackatónem.</p>
+        <p>Jeho specialitou jsou svatební a pohřební marše. Díky nim se také seznámil se Šmoullou. Jeho citlivý sluch
+          vycítí na desítky kilometrů, když se někde v okolí plánuje svatba nebo pohřeb. Šťastní budoucí manželé,
+          případně budoucí šťastní pozůstalí, pak od Vojty dostanou vždy čerstvou nabídku hudebního doprovodu plánované
+          akce.</p>
       </div>
     </div>
   </template>
@@ -1801,8 +2097,15 @@
     <div data-title="Standa" data-subtitle="Elektrický kytarista">
       <div class="member-copy">
         <img class="member-photo" src="/members-photo/standa.jpg" alt="Standa" />
-        <p>Standa odjakživa chodí s kytarou po tomto světě, a i kdyby ho ufoni přenesli jinam, bude s nějakou chodit i tam. Na planetě Zemi ho můžete potkat u táboráku, u vody, na srubu, pokaždé se svým zpěvníkem, který obsahuje pestrou paletu tábornických, romantických i rockových písniček. Po dlouhých letech se svojí Žofkou (akustika kategorie pádlo) se dopracoval k první elektrické kytaře, prvnímu kombu, aby nakonec objevil svůj pastelový telecaster.</p>
-        <p>V tu dobu ale stále odmítal jakkékoliv zapojení do veřejného vystupování. Naštěstí ale v Rockové škole potkal skvělého učitele a kytaristu Milana Kramaroviče, který Standovu rezistenci pomalu a postupně nahlodal, aby po dlouhých letech nakonec podlehl a odvážil se na pódium. Dnes už má za sebou několik školních koncertů, vánoční jazzový improvizační večer s Milanem Kramarovičem a dnes v Hackatónu uslyšíte jeho ostře vybroušená sóla.</p>
+        <p>Standa odjakživa chodí s kytarou po tomto světě, a i kdyby ho ufoni přenesli jinam, bude s nějakou chodit i
+          tam. Na planetě Zemi ho můžete potkat u táboráku, u vody, na srubu, pokaždé se svým zpěvníkem, který obsahuje
+          pestrou paletu tábornických, romantických i rockových písniček. Po dlouhých letech se svojí Žofkou (akustika
+          kategorie pádlo) se dopracoval k první elektrické kytaře, prvnímu kombu, aby nakonec objevil svůj pastelový
+          telecaster.</p>
+        <p>V tu dobu ale stále odmítal jakkékoliv zapojení do veřejného vystupování. Naštěstí ale v Rockové škole potkal
+          skvělého učitele a kytaristu Milana Kramaroviče, který Standovu rezistenci pomalu a postupně nahlodal, aby po
+          dlouhých letech nakonec podlehl a odvážil se na pódium. Dnes už má za sebou několik školních koncertů, vánoční
+          jazzový improvizační večer s Milanem Kramarovičem a dnes v Hackatónu uslyšíte jeho ostře vybroušená sóla.</p>
       </div>
     </div>
   </template>
@@ -1810,7 +2113,14 @@
     <div data-title="Tomáš" data-subtitle="Basový táta">
       <div class="member-copy">
         <img class="member-photo" src="/members-photo/tomas.jpg" alt="Tomáš" />
-        <p>S muzikou laškoval jako student a mladý dělnický kádr, od klasické kytary odešel k táboráku a pak na dlouhou dobu šla kytara do skříně. Okolo roku 2008 ho přivedl zpět ke hraní Standa Kašný, se kterým se od té doby prokousává od domácích dýchánků až k veřejným vystoupením. Cestou ho zvědavost přiměla osahat si i další brnkací nástroje, aby nakonec zakotvil u basové kytary. V roce 2019 naskočil do kapely The Deadliners, se kterou hráli cover verze převážně rockových pecek, dokud je okolnosti nerozfoukaly v roce 2022 po světě. Velmi ho ovlivnilo setkání s vynikajícím kytaristou Milanem Kramarovičem v Rockové škole v roce 2022, který ho požádal o doplnění školní kapely. Několik společných zkoušek vyvrcholilo vánočním jazzovým improvizačním večerem, na kterém se setkali opět se Standou Kašným.</p>
+        <p>S muzikou laškoval jako student a mladý dělnický kádr, od klasické kytary odešel k táboráku a pak na dlouhou
+          dobu šla kytara do skříně. Okolo roku 2008 ho přivedl zpět ke hraní Standa Kašný, se kterým se od té doby
+          prokousává od domácích dýchánků až k veřejným vystoupením. Cestou ho zvědavost přiměla osahat si i další
+          brnkací nástroje, aby nakonec zakotvil u basové kytary. V roce 2019 naskočil do kapely The Deadliners, se
+          kterou hráli cover verze převážně rockových pecek, dokud je okolnosti nerozfoukaly v roce 2022 po světě. Velmi
+          ho ovlivnilo setkání s vynikajícím kytaristou Milanem Kramarovičem v Rockové škole v roce 2022, který ho
+          požádal o doplnění školní kapely. Několik společných zkoušek vyvrcholilo vánočním jazzovým improvizačním
+          večerem, na kterém se setkali opět se Standou Kašným.</p>
       </div>
     </div>
   </template>
@@ -1818,7 +2128,14 @@
     <div data-title="Vojtěch" data-subtitle="Multiinstrumentální bubeník a hlas">
       <div class="member-copy">
         <img class="member-photo" src="/members-photo/vojtech.jpg" alt="Vojtěch" />
-        <p>První společný koncert ve Vinohradském pivovaru na sklonku roku 2024 Vojtěchova minulost je zahalena tajemstvím a vypadá to, že v sobě skrývá velmi dojemný příběh. Kapela se ho ujala poté, co na něj náhodou při svém pravidelném branném cvičení narazila v prostorách bývalého vojenského újezdu, kde obývá opuštěný bunkr. Je až s podivem, že přes pancéřové dveře pronikly rytmické zvuky, která přiměly kapelu pátrat po jejich zdroji. Vojtěch byl zpočátku velmi plachý, ale společnými silami se nám ho podařilo hraním na nástroje uklidnit. Ukázalo se, že je rytmicky nadanější než většina z nás a že se tím pádem vyplatí ochočit si ho jako kapelního bubeníka. Po čase se také projevil jeho herecký talent, nicméně se trochu obáváme, že jeho slabinou bude život na vysoké noze, ke kterému tíhne.</p>
+        <p>První společný koncert ve Vinohradském pivovaru na sklonku roku 2024 Vojtěchova minulost je zahalena
+          tajemstvím a vypadá to, že v sobě skrývá velmi dojemný příběh. Kapela se ho ujala poté, co na něj náhodou při
+          svém pravidelném branném cvičení narazila v prostorách bývalého vojenského újezdu, kde obývá opuštěný bunkr.
+          Je až s podivem, že přes pancéřové dveře pronikly rytmické zvuky, která přiměly kapelu pátrat po jejich
+          zdroji. Vojtěch byl zpočátku velmi plachý, ale společnými silami se nám ho podařilo hraním na nástroje
+          uklidnit. Ukázalo se, že je rytmicky nadanější než většina z nás a že se tím pádem vyplatí ochočit si ho jako
+          kapelního bubeníka. Po čase se také projevil jeho herecký talent, nicméně se trochu obáváme, že jeho slabinou
+          bude život na vysoké noze, ke kterému tíhne.</p>
       </div>
     </div>
   </template>
@@ -1854,35 +2171,35 @@
     navSections.forEach((section) => navObserver.observe(section));
 
 
-        const randomPhoto = document.getElementById('random-photo');
-        const photoWidgetButton = document.getElementById('photo-widget-button');
-        const photoPaths = Array.from({ length: 10 }, (_, index) => `/photos/${index + 1}.jpg`);
-        let currentPhotoIndex = -1;
+    const randomPhoto = document.getElementById('random-photo');
+    const photoWidgetButton = document.getElementById('photo-widget-button');
+    const photoPaths = Array.from({ length: 10 }, (_, index) => `/photos/${index + 1}.jpg`);
+    let currentPhotoIndex = -1;
 
-        function showRandomPhoto() {
-          if (!randomPhoto || !photoPaths.length) return;
+    function showRandomPhoto() {
+      if (!randomPhoto || !photoPaths.length) return;
 
-          let nextIndex = currentPhotoIndex;
-          if (photoPaths.length === 1) {
-            nextIndex = 0;
-          } else {
-            while (nextIndex === currentPhotoIndex) {
-              nextIndex = Math.floor(Math.random() * photoPaths.length);
-            }
-          }
-
-          currentPhotoIndex = nextIndex;
-          randomPhoto.src = photoPaths[currentPhotoIndex];
-          randomPhoto.alt = `Fotka kapely Hackaton ${currentPhotoIndex + 1}`;
+      let nextIndex = currentPhotoIndex;
+      if (photoPaths.length === 1) {
+        nextIndex = 0;
+      } else {
+        while (nextIndex === currentPhotoIndex) {
+          nextIndex = Math.floor(Math.random() * photoPaths.length);
         }
+      }
 
-        if (randomPhoto) {
-          showRandomPhoto();
-        }
+      currentPhotoIndex = nextIndex;
+      randomPhoto.src = photoPaths[currentPhotoIndex];
+      randomPhoto.alt = `Fotka kapely Hackaton ${currentPhotoIndex + 1}`;
+    }
 
-        if (photoWidgetButton) {
-          photoWidgetButton.addEventListener('click', showRandomPhoto);
-        }
+    if (randomPhoto) {
+      showRandomPhoto();
+    }
+
+    if (photoWidgetButton) {
+      photoWidgetButton.addEventListener('click', showRandomPhoto);
+    }
 
     const modal = document.getElementById('concert-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -1891,9 +2208,9 @@
     const closeButton = modal.querySelector('.modal-close');
     let lastTrigger = null;
 
-    function openConcertModal(templateId, trigger){
+    function openConcertModal(templateId, trigger) {
       const template = document.getElementById(templateId);
-      if(!template) return;
+      if (!template) return;
 
       const wrapper = template.content.firstElementChild.cloneNode(true);
       modalTitle.textContent = wrapper.dataset.title || 'Koncert';
@@ -1910,12 +2227,12 @@
       closeButton.focus();
     }
 
-    function closeConcertModal(){
+    function closeConcertModal() {
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
       modalContent.innerHTML = '';
       document.body.style.overflow = '';
-      if(lastTrigger) lastTrigger.focus();
+      if (lastTrigger) lastTrigger.focus();
     }
 
     document.querySelectorAll('[data-modal-target]').forEach((button) => {
@@ -1925,24 +2242,24 @@
     closeButton.addEventListener('click', closeConcertModal);
 
     modal.addEventListener('click', (event) => {
-      if(event.target === modal){
+      if (event.target === modal) {
         closeConcertModal();
       }
     });
 
     document.addEventListener('keydown', (event) => {
-      if(event.key === 'Escape' && modal.classList.contains('is-open')){
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) {
         closeConcertModal();
       }
-      if(event.key === 'Escape' && oracleModal && oracleModal.classList.contains('is-open')){
+      if (event.key === 'Escape' && oracleModal && oracleModal.classList.contains('is-open')) {
         closeOracle();
       }
-      if(event.key === 'Escape' && downloadsModal && downloadsModal.classList.contains('is-open')){
+      if (event.key === 'Escape' && downloadsModal && downloadsModal.classList.contains('is-open')) {
         closeDownloads();
       }
     });
 
-    const oracleCards = ['A co na to říká tvoje tělo?','Nech si namasírovat krk','Jen nepřestávej','Není chyba jen skrytý záměr?','Zkus to okopírovat','Kdo žije bez bláznovství, není tak moudrý, jak vypadá','Jakou chybu jsi udělal posledně?','Hledej důvody, proč to půjde','Přistup k tomu s hravou bezstarostnou odevzdaností','Jestli nepomáhá rozum, pomůže čas','Vzpomeň si na ty tiché večery','Jenom kousek, ne všechno.','Co by udělal tvůj nejlepší přítel?','Přečti o tom nějakou knihu','O čem teď doopravdy přemýšlíš?','Roztoč to','Něco chybí?','Jdi ven','Nedělej nic tak dlouho, jak jen to je možné','Použij starší nápad','Už nemluv','Vrať se po svých stopách zpět','Malý oheň vítr uhasí, velký rozdmýchá.','Chtěl by to někdo jiný?','Talent? To bývá často hlavně práce na talentu.','Nejsou to jen unavené oči, že nevidíš tu svátečnost?','Máš terén? Vytvoř křídla. Máš křídla? Vytvoř terén.','Prostě si věř.','Jdeš nahoru nebo dolů?','Buď drzý.','Prozkoumej v jakém pořadí věci děláš.','Není to jen tvý mylná interpretace?','Strach stvořil bohy, odvaha krále.','Jdi a něco vytvoř.','Z ničeho trochu víc než nic.','Čelíš volbě? Udělej obojí.','Zeptej se ticha, co si myslí.','Zastav se těsně před cílem – a rozhlédni se.','Místo odpovědi změň otázku.','Mluv s věcmi, které mlčí.','Nepospíchej. Nic neuteče, co má zůstat.','Ztratit směr může být začátek cesty.','Udělej to špatně – ale srdcem.','Podívej se na svět jako poprvé.','Někdy je třeba jít dál, i když nevíš kam.','Zeptej se těla, kde se skrývá tvá mysl.','Pusť to, ať tě to samo chytí.','Když nevíš, usměj se.','Přestaň chtít být lepší a prostě buď.','Nech svět chvíli, ať tě předběhne.','Zhasni světlo a uvidíš víc.','Zkus to říct jinak, nebo vůbec.','Buď s tím, co je – ne s tím, co by mělo být.','Zatancuj si s problémem místo boje.','Nepotřebuješ plán, potřebuješ odvahu.','Možná už jsi tam, kam se chceš dostat.'];
+    const oracleCards = ['A co na to říká tvoje tělo?', 'Nech si namasírovat krk', 'Jen nepřestávej', 'Není chyba jen skrytý záměr?', 'Zkus to okopírovat', 'Kdo žije bez bláznovství, není tak moudrý, jak vypadá', 'Jakou chybu jsi udělal posledně?', 'Hledej důvody, proč to půjde', 'Přistup k tomu s hravou bezstarostnou odevzdaností', 'Jestli nepomáhá rozum, pomůže čas', 'Vzpomeň si na ty tiché večery', 'Jenom kousek, ne všechno.', 'Co by udělal tvůj nejlepší přítel?', 'Přečti o tom nějakou knihu', 'O čem teď doopravdy přemýšlíš?', 'Roztoč to', 'Něco chybí?', 'Jdi ven', 'Nedělej nic tak dlouho, jak jen to je možné', 'Použij starší nápad', 'Už nemluv', 'Vrať se po svých stopách zpět', 'Malý oheň vítr uhasí, velký rozdmýchá.', 'Chtěl by to někdo jiný?', 'Talent? To bývá často hlavně práce na talentu.', 'Nejsou to jen unavené oči, že nevidíš tu svátečnost?', 'Máš terén? Vytvoř křídla. Máš křídla? Vytvoř terén.', 'Prostě si věř.', 'Jdeš nahoru nebo dolů?', 'Buď drzý.', 'Prozkoumej v jakém pořadí věci děláš.', 'Není to jen tvý mylná interpretace?', 'Strach stvořil bohy, odvaha krále.', 'Jdi a něco vytvoř.', 'Z ničeho trochu víc než nic.', 'Čelíš volbě? Udělej obojí.', 'Zeptej se ticha, co si myslí.', 'Zastav se těsně před cílem – a rozhlédni se.', 'Místo odpovědi změň otázku.', 'Mluv s věcmi, které mlčí.', 'Nepospíchej. Nic neuteče, co má zůstat.', 'Ztratit směr může být začátek cesty.', 'Udělej to špatně – ale srdcem.', 'Podívej se na svět jako poprvé.', 'Někdy je třeba jít dál, i když nevíš kam.', 'Zeptej se těla, kde se skrývá tvá mysl.', 'Pusť to, ať tě to samo chytí.', 'Když nevíš, usměj se.', 'Přestaň chtít být lepší a prostě buď.', 'Nech svět chvíli, ať tě předběhne.', 'Zhasni světlo a uvidíš víc.', 'Zkus to říct jinak, nebo vůbec.', 'Buď s tím, co je – ne s tím, co by mělo být.', 'Zatancuj si s problémem místo boje.', 'Nepotřebuješ plán, potřebuješ odvahu.', 'Možná už jsi tam, kam se chceš dostat.'];
     const oracleModal = document.getElementById('oracle-modal');
     const oracleCard = document.getElementById('oracle-card');
     const oracleText = document.getElementById('oracle-text');
@@ -2026,4 +2343,5 @@
 
   </script>
 </body>
+
 </html>
