@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hackaton souhrn</title>
+
+  <style>
+    :root{
+      --bg:#0b1220; --text:#e5e7eb; --muted:#9ca3af; --border:rgba(255,255,255,0.10);
+      --ok:#22c55e; --no:#ef4444; --maybe:#a3a3a3; --link:#60a5fa;
+      --tile-ok: rgba(34,197,94,0.10);
+      --tile-warn: rgba(245,158,11,0.12);
+      --tile-bad: rgba(239,68,68,0.12);
+    }
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--text);
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(96,165,250,0.15), transparent),
+                  radial-gradient(1000px 500px at 90% 10%, rgba(34,197,94,0.12), transparent),
+                  var(--bg);
+    }
+    header{ padding:28px 18px 14px; max-width:1100px; margin:0 auto; }
+    h1{ margin:0 0 10px; font-size:20px; font-weight:800; }
+    .controls{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:14px; padding:12px;
+    }
+    .controls label{ color:var(--muted); font-size:13px; }
+    input[type="text"]{
+      background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      border-radius:10px; padding:10px; color:var(--text);
+      min-width:220px;
+    }
+    button{
+      background:rgba(255,255,255,0.06); border:1px solid var(--border);
+      border-radius:10px; padding:10px 12px; color:var(--text);
+      cursor:pointer;
+    }
+    button:hover{ background:rgba(255,255,255,0.10); }
+    main{ max-width:1100px; margin:0 auto; padding:16px 18px 28px; }
+    .meta{
+      display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;
+      margin-bottom:14px; color:var(--muted); font-size:13px;
+    }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:12px; }
+    .tile{
+      border:1px solid var(--border);
+      border-radius:16px; padding:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+    .tile.event-ok{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+                  radial-gradient(900px 300px at 20% 0%, var(--tile-ok), transparent);
+    }
+    .tile.event-warn{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+                  radial-gradient(900px 300px at 20% 0%, var(--tile-warn), transparent);
+    }
+    .tile.event-bad{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+                  radial-gradient(900px 300px at 20% 0%, var(--tile-bad), transparent);
+    }
+    .top{ display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+    .title{ margin:0; font-size:15px; font-weight:850; line-height:1.25; }
+    .sub{ margin-top:6px; font-size:12px; color:var(--muted); line-height:1.4; }
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px; font-size:12px;
+      border:1px solid var(--border); background: rgba(0,0,0,0.18); white-space:nowrap;
+      color: var(--muted);
+    }
+    .attendees{ margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
+    .attRow{
+      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      padding:8px 10px; border:1px solid rgba(255,255,255,0.06); border-radius:12px;
+      background: rgba(0,0,0,0.14); margin-bottom:8px;
+    }
+    .who{ display:flex; align-items:center; gap:10px; min-width:0; font-weight:780; }
+    .whoText{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width: 100%; }
+    .whoIcon{
+      width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center;
+      border-radius:10px; border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      font-size:16px; flex: 0 0 auto;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px; font-size:12px;
+      border:1px solid var(--border); background: rgba(0,0,0,0.18); white-space:nowrap;
+    }
+    .badge .dot{ width:9px; height:9px; border-radius:50%; }
+    .badge.ok .dot{ background:var(--ok); }
+    .badge.no .dot{ background:var(--no); }
+    .badge.maybe .dot{ background:var(--maybe); }
+    .badge.ok{ color:#bbf7d0; } .badge.no{ color:#fecaca; } .badge.maybe{ color:#e5e7eb; }
+    .empty{ padding:18px; border:1px dashed var(--border); border-radius:14px; color:var(--muted); background:rgba(255,255,255,0.02); }
+    .err{ padding:12px 14px; border-radius:14px; border:1px solid rgba(239,68,68,0.35); background: rgba(239,68,68,0.10); color:#fecaca; margin-bottom:12px; display:none; white-space:pre-wrap; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Hackaton souhrn</h1>
+    <div class="controls">
+      <div>
+        <button id="refresh">Obnovit</button>
+      </div>
+      <div>
+        <button type="button" onclick="location.href='/calendar/report.html'" style="margin-left:12px;"> Report lajdáků</button>
+      </div>  
+    </div>
+  </header>
+
+  <main>
+    <div id="err" class="err"></div>
+
+    <details id="summaryPanel" style="margin: 0 0 14px;">
+      <summary style="cursor:pointer; user-select:none; padding:10px 12px; border:1px solid rgba(255,255,255,0.10); border-radius:14px; background: rgba(255,255,255,0.03);">
+        Souhrn událostí a filtry
+      </summary>
+      <div style="margin-top:10px; padding:12px; border:1px solid rgba(255,255,255,0.10); border-radius:14px; background: rgba(0,0,0,0.12);">
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px;">
+          <div class="pill"><strong>Filtr statusu:</strong></div>
+
+          <label class="pill" style="cursor:pointer;">
+            <input type="checkbox" id="flt_ok" checked style="margin-right:8px; transform: translateY(1px);" />
+            Potvrzeno
+          </label>
+
+          <label class="pill" style="cursor:pointer;">
+            <input type="checkbox" id="flt_warn" checked style="margin-right:8px; transform: translateY(1px);" />
+            NE vši jdou
+          </label>
+
+          <label class="pill" style="cursor:pointer;">
+            <input type="checkbox" id="flt_bad" checked style="margin-right:8px; transform: translateY(1px);" />
+            Čeká se
+          </label>
+        </div>
+
+        <div style="overflow:auto;">
+          <table style="width:100%; border-collapse:separate; border-spacing:0 8px;">
+            <thead>
+              <tr style="text-align:left; color: var(--muted); font-size: 12px;">
+                <th style="padding:0 8px; white-space:nowrap;">Začátek</th>
+                <th style="padding:0 8px;">Událost</th>
+                <th style="padding:0 8px; white-space:nowrap;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="summaryBody"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </details>
+
+
+    <div class="meta">
+      <div id="count">Načítám…</div>
+      <div id="range"></div>
+    </div>
+
+    <div id="out" class="grid"></div>
+    <div id="empty" class="empty" style="display:none;"></div>
+  </main>
+
+  <script>
+// MUSÍ sedět s config.php API_SHARED_TOKEN
+    const API_TOKEN = "asgfaegsgfasdgsergydgsegseg";
+
+    // Speciální účastníci
+    const SPECIAL = new Map([
+["bukovskyjosef@gmail.com",      { name: "Pepa",   icons: ["🎤"] }],
+      ["lauead@gmail.com",             { name: "Adam",   icons: ["🗣️"] }],
+      ["vojtadr@gmail.com",            { name: "Vojta",  icons: ["🎹"] }],
+      ["qzr@email.cz",                 { name: "Vojtěch",icons: ["🥁"] }],
+      ["standa_kasny@hotmail.com",     { name: "Standa", icons: ["🎸"] }],
+      ["tomas.tarant@gmail.com",     { name: "Tomáš", icons: ["🆃"] }],
+    ]);
+
+    // Ignoruj účastníka info@hackaton.cz (nezobrazuj ho a nepočítej ho do statusu události)
+    const IGNORE_ATTENDEE_EMAILS = new Set(["info@hackaton.cz", "janca.koutnikova@gmail.com"]);
+
+    // Lokální stav (ne window.*)
+    let ALL_EVENTS = [];
+
+    function filterAttendees(list){
+      const out = [];
+      const arr = list || [];
+      for (let i = 0; i < arr.length; i++) {
+        const a = arr[i] || {};
+        const email = ((a.email || "") + "").trim().toLowerCase();
+        if (!email) continue;
+        if (IGNORE_ATTENDEE_EMAILS.has(email)) continue;
+        out.push(a);
+      }
+      return out;
+    }
+
+    function getSelectedStatusFilters(){
+      const ok = document.getElementById("flt_ok");
+      const warn = document.getElementById("flt_warn");
+      const bad = document.getElementById("flt_bad");
+      return {
+        ok: ok ? ok.checked : true,
+        warn: warn ? warn.checked : true,
+        bad: bad ? bad.checked : true,
+      };
+    }
+
+    // Bez moderních operátorů ?? a ?. kvůli kompatibilitě
+    function fold(str) {
+      const s = (str === null || str === undefined) ? "" : String(str);
+      return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    function parseIsoDate(s){ const d=new Date(s); return isNaN(d.getTime())?null:d; }
+    function formatDT(d){
+      try { return new Intl.DateTimeFormat("cs-CZ",{dateStyle:"medium",timeStyle:"short"}).format(d); }
+      catch(e) { return d.toISOString(); }
+    }
+
+    function normalizeStatus(raw){
+      const s=fold(raw);
+      if(s==="accepted") return "accepted";
+      if(s==="declined") return "declined";
+      if(s==="tentative") return "tentative";
+      if(s==="needsaction" || s==="") return "needsAction";
+      return "needsAction";
+    }
+
+    function statusVisual(status){
+      const s=normalizeStatus(status);
+      if(s==="accepted") return {cls:"ok",icon:"✅",label:"Přijal"};
+      if(s==="declined") return {cls:"no",icon:"❌",label:"Odmítl"};
+      if(s==="tentative") return {cls:"maybe",icon:"❓",label:"Možná"};
+      return {cls:"maybe",icon:"❓",label:"Bez akce"};
+    }
+
+    function eventStatusClass(attendees){
+      if(!attendees || attendees.length===0) return {cls:"event-warn",pill:"Bez účastníků"};
+      const st=[];
+      for(let i=0;i<attendees.length;i++) st.push(normalizeStatus(attendees[i].status));
+      for(let i=0;i<st.length;i++) if(st[i]==="needsAction") return {cls:"event-bad",pill:"Čeká se"};
+      for(let i=0;i<st.length;i++) if(st[i]!=="accepted") return {cls:"event-warn",pill:"Ne vši jdou"};
+      return {cls:"event-ok",pill:"Potvrzeno"};
+    }
+
+    function escapeHtml(s){
+      const str = (s === null || s === undefined) ? "" : String(s);
+      return str
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
+    function escapeAttr(s) {
+      // jednoduché pro href
+      const str = (s === null || s === undefined) ? "" : String(s);
+      return str.replace(/"/g, "%22");
+    }
+
+    function attendeeRowHtml(a){
+      const em = ((a && a.email) ? String(a.email) : "").trim().toLowerCase();
+      if (IGNORE_ATTENDEE_EMAILS.has(em)) return "";
+
+      const vis=statusVisual(a ? a.status : "");
+      const email=em;
+      const special=SPECIAL.get(email);
+
+      let who="";
+      if(special){
+        const icons=(special.icons||[]).map(ic=>`<span class="whoIcon" title="${escapeHtml(special.name)}">${ic}</span>`).join("");
+        who = `${icons}<span class="whoText">${escapeHtml(special.name)}</span>`;
+      } else {
+        const label=(a && a.email ? String(a.email).trim() : "") || "— bez emailu —";
+        who = `<span class="whoIcon">👤</span><span class="whoText" title="${escapeHtml(label)}">${escapeHtml(label)}</span>`;
+      }
+
+      return `<div class="attRow">
+        <div style="min-width:0;"><div class="who">${who}</div></div>
+        <div class="badge ${vis.cls}" title="${vis.label}">
+          <span class="dot"></span><span aria-hidden="true">${vis.icon}</span><span>${vis.label}</span>
+        </div>
+      </div>`;
+    }
+
+    function sortEvents(events){
+      const arr = events.slice();
+      arr.sort((a,b)=>{
+        const da=parseIsoDate(a.start), db=parseIsoDate(b.start);
+        if(!da && !db) return 0; if(!da) return 1; if(!db) return -1;
+        return da-db;
+      });
+      return arr;
+    }
+
+    function renderSummaryTable(events){
+      const body = document.getElementById("summaryBody");
+      if (!body) return;
+      body.innerHTML = "";
+
+      for (let i=0;i<events.length;i++) {
+        const ev = events[i];
+        const start = parseIsoDate(ev.start);
+        const attendees = filterAttendees(ev.attendees || []);
+        const state = eventStatusClass(attendees);
+
+        const tr = document.createElement("tr");
+        tr.style.background = "rgba(255,255,255,0.03)";
+        tr.style.border = "1px solid rgba(255,255,255,0.10)";
+        tr.style.borderRadius = "12px";
+        tr.style.overflow = "hidden";
+        tr.style.cursor = "pointer";
+
+        tr.addEventListener("click", function(){
+          const el = document.getElementById("ev_" + (ev.event_id || ""));
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        const td1 = document.createElement("td");
+        td1.style.padding = "10px 8px";
+        td1.style.whiteSpace = "nowrap";
+        td1.textContent = start ? formatDT(start) : "—";
+
+        const td2 = document.createElement("td");
+        td2.style.padding = "10px 8px";
+        td2.textContent = ev.summary || "— bez summary —";
+
+        const td3 = document.createElement("td");
+        td3.style.padding = "10px 8px";
+        td3.innerHTML = "<span class=\"pill\">" + escapeHtml(state.pill) + "</span>";
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        body.appendChild(tr);
+      }
+    }
+
+    function render(events){
+      const out=document.getElementById("out");
+      const empty=document.getElementById("empty");
+      const count=document.getElementById("count");
+      const range=document.getElementById("range");
+
+      out.innerHTML=""; empty.style.display="none"; range.textContent="";
+
+      if(!events.length){
+        empty.style.display="block";
+        empty.textContent="Žádné události v aktuálním filtru.";
+        count.textContent="0 událostí";
+        return;
+      }
+
+      count.textContent = events.length + " událostí";
+      const dates=events.map(e=>parseIsoDate(e.start)).filter(Boolean).sort((a,b)=>a-b);
+      if(dates.length) range.textContent = formatDT(dates[0]) + " – " + formatDT(dates[dates.length-1]);
+
+      for(let i=0;i<events.length;i++) {
+        const ev = events[i];
+        const start=parseIsoDate(ev.start), end=parseIsoDate(ev.end);
+
+        const attendees=filterAttendees(ev.attendees||[]);
+        attendees.sort((x,y)=>{
+          const xs=SPECIAL.has(((x.email||"")+ "").trim().toLowerCase());
+          const ys=SPECIAL.has(((y.email||"")+ "").trim().toLowerCase());
+          if(xs!==ys) return xs? -1: 1;
+          return ((x.email||"") + "").localeCompare(((y.email||"")+""), "cs");
+        });
+
+        const state=eventStatusClass(attendees);
+
+        const tile=document.createElement("div");
+        tile.className="tile " + state.cls;
+        tile.id = "ev_" + (ev.event_id || "");
+
+        tile.innerHTML =
+          `<div class="top">
+            <div style="min-width:0;">
+              <p class="title">${escapeHtml(ev.summary||"— bez summary —")}</p>
+              <div class="sub">
+                ${start?("Začátek: " + escapeHtml(formatDT(start)) + "<br>"):""}
+                <!-- ${end?("Konec: " + escapeHtml(formatDT(end)) + "<br>"):""} -->
+                ${ev.event_link?("Odkaz: <a href=\"" + escapeAttr(ev.event_link) + "\" target=\"_blank\" rel=\"noopener\">otevřít událost</a><br>"):""}
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pill">${escapeHtml(state.pill)}</div>
+              <div class="sub" style="margin-top:6px;">Účastníků: <strong>${attendees.length}</strong></div>
+            </div>
+          </div>
+          <div class="attendees">${attendees.map(attendeeRowHtml).join("")}</div>`;
+
+        out.appendChild(tile);
+      }
+    }
+
+    function applyUiFilters(){
+      const sel = getSelectedStatusFilters();
+      const filtered = [];
+      for (let i=0;i<ALL_EVENTS.length;i++) {
+        const ev = ALL_EVENTS[i];
+        const attendees = filterAttendees(ev.attendees || []);
+        const state = eventStatusClass(attendees);
+
+        if (state.cls === "event-ok" && !sel.ok) continue;
+        if (state.cls === "event-warn" && !sel.warn) continue;
+        if (state.cls === "event-bad" && !sel.bad) continue;
+
+        filtered.push(ev);
+      }
+
+      const sorted = sortEvents(filtered);
+      renderSummaryTable(sorted);
+      render(sorted);
+    }
+
+    function setError(msg){
+      const el=document.getElementById("err");
+      if(!msg){ el.style.display="none"; el.textContent=""; return; }
+      el.style.display="block"; el.textContent=msg;
+    }
+
+    async function load(){
+      setError("");
+      // filtr na eventy odstraněn -> needle prázdné
+      const url = "/calendar/api/events.php?token=" + encodeURIComponent(API_TOKEN) + "&needle=";
+      const r = await fetch(url, { cache: "no-store" });
+      let data = null;
+      try { data = await r.json(); } catch(e) { data = null; }
+
+      if(!r.ok || !data || data.ok !== true) {
+        const msg = (data && data.error) ? data.error : ("API error (" + r.status + ")");
+        throw new Error(msg);
+      }
+
+      ALL_EVENTS = sortEvents(data.events || []);
+      applyUiFilters();
+    }
+
+    document.getElementById("refresh").addEventListener("click", function(){
+      load().catch(function(e){ setError(String(e && e.message ? e.message : e)); });
+    });
+
+    ["flt_ok","flt_warn","flt_bad"].forEach(function(id){
+      const el=document.getElementById(id);
+      if(el) el.addEventListener("change", applyUiFilters);
+    });
+
+    load().catch(function(e){ setError(String(e && e.message ? e.message : e)); });
+</script>
+</body>
+</html>

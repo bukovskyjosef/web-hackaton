@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hackaton reporty podle účastníků</title>
+
+  <style>
+:root{
+      --bg:#0b1220; --text:#e5e7eb; --muted:#9ca3af; --border:rgba(255,255,255,0.10);
+      --ok:#22c55e; --no:#ef4444; --maybe:#a3a3a3; --link:#60a5fa;
+      --tile-ok: rgba(34,197,94,0.10);
+      --tile-warn: rgba(245,158,11,0.12);
+      --tile-bad: rgba(239,68,68,0.12);
+    }
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--text);
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(96,165,250,0.15), transparent),
+                  radial-gradient(1000px 500px at 90% 10%, rgba(34,197,94,0.12), transparent),
+                  var(--bg);
+    }
+    header{ padding:28px 18px 14px; max-width:1100px; margin:0 auto; }
+    h1{ margin:0 0 10px; font-size:20px; font-weight:800; }
+    .controls{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:14px; padding:12px;
+    }
+    .controls label{ color:var(--muted); font-size:13px; }
+    input[type="text"]{
+      background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      border-radius:10px; padding:10px; color:var(--text);
+      min-width:220px;
+    }
+    button{
+      background:rgba(255,255,255,0.06); border:1px solid var(--border);
+      border-radius:10px; padding:10px 12px; color:var(--text);
+      cursor:pointer;
+    }
+    button:hover{ background:rgba(255,255,255,0.10); }
+    main{ max-width:1100px; margin:0 auto; padding:16px 18px 28px; }
+    .meta{
+      display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;
+      margin-bottom:14px; color:var(--muted); font-size:13px;
+    }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:12px; }
+    .tile{
+      border:1px solid var(--border);
+      border-radius:16px; padding:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+    .tile.event-ok{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+                  radial-gradient(900px 300px at 20% 0%, var(--tile-ok), transparent);
+    }
+    .tile.event-warn{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+                  radial-gradient(900px 300px at 20% 0%, var(--tile-warn), transparent);
+    }
+    .tile.event-bad{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+                  radial-gradient(900px 300px at 20% 0%, var(--tile-bad), transparent);
+    }
+    .top{ display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+    .title{ margin:0; font-size:15px; font-weight:850; line-height:1.25; }
+    .sub{ margin-top:6px; font-size:12px; color:var(--muted); line-height:1.4; }
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px; font-size:12px;
+      border:1px solid var(--border); background: rgba(0,0,0,0.18); white-space:nowrap;
+      color: var(--muted);
+    }
+    .attendees{ margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
+    .attRow{
+      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      padding:8px 10px; border:1px solid rgba(255,255,255,0.06); border-radius:12px;
+      background: rgba(0,0,0,0.14); margin-bottom:8px;
+    }
+    .who{ display:flex; align-items:center; gap:10px; min-width:0; font-weight:780; }
+    .whoText{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width: 100%; }
+    .whoIcon{
+      width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center;
+      border-radius:10px; border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      font-size:16px; flex: 0 0 auto;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px; font-size:12px;
+      border:1px solid var(--border); background: rgba(0,0,0,0.18); white-space:nowrap;
+    }
+    .badge .dot{ width:9px; height:9px; border-radius:50%; }
+    .badge.ok .dot{ background:var(--ok); }
+    .badge.no .dot{ background:var(--no); }
+    .badge.maybe .dot{ background:var(--maybe); }
+    .badge.ok{ color:#bbf7d0; } .badge.no{ color:#fecaca; } .badge.maybe{ color:#e5e7eb; }
+    .empty{ padding:18px; border:1px dashed var(--border); border-radius:14px; color:var(--muted); background:rgba(255,255,255,0.02); }
+    .err{ padding:12px 14px; border-radius:14px; border:1px solid rgba(239,68,68,0.35); background: rgba(239,68,68,0.10); color:#fecaca; margin-bottom:12px; display:none; white-space:pre-wrap; }
+
+/* Drobné doplňky pro reporty */
+    .grid {
+      grid-template-columns: 1fr; /* reporty jsou čitelnější v jednom sloupci */
+    }
+    .toolbar {
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:14px; padding:12px;
+    }
+    .toolbar .pill {
+      cursor:pointer;
+    }
+    .kpis {
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:10px;
+    }
+    .kpi {
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.12);
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .kpi strong { color: var(--text); }
+    .cols {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .col {
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      background: rgba(0,0,0,0.10);
+      padding: 10px;
+    }
+    .col h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 800;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 10px;
+    }
+    .evt {
+      display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
+      padding:8px 10px;
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:12px;
+      background: rgba(0,0,0,0.14);
+      margin-bottom: 8px;
+    }
+    .evt:last-child { margin-bottom:0; }
+    .evt .t {
+      min-width:0;
+    }
+    .evt .t .s {
+      font-weight: 780;
+      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .evt .t .d {
+      margin-top:4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .mini {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .score {
+      font-weight: 900;
+      color: var(--text);
+    }
+    .tag {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,0.18);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .tag .dot {
+      width:9px; height:9px; border-radius: 50%;
+    }
+    .tag.ok .dot { background: var(--ok); }
+    .tag.maybe .dot { background: var(--maybe); }
+    .tag.no .dot { background: var(--no); }
+    .tag.needs .dot { background: var(--maybe); }
+    .nav {
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 10px;
+    }
+    .nav a {
+      color: var(--link);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Reporty podle účastníků</h1>
+
+    <div class="nav">
+      <a href="/calendar/">← Zpět na souhrn událostí</a>
+    </div>
+
+    <div class="toolbar" style="margin-top: 10px;">
+      <button id="refresh">Obnovit</button>
+
+      <label class="pill" style="cursor:pointer;">
+        <input type="checkbox" id="show_accepted" checked style="margin-right:8px; transform: translateY(1px);" />
+        Přijal
+      </label>
+
+      <label class="pill" style="cursor:pointer;">
+        <input type="checkbox" id="show_needs" checked style="margin-right:8px; transform: translateY(1px);" />
+        Bez akce
+      </label>
+
+      <label class="pill" style="cursor:pointer;">
+        <input type="checkbox" id="show_declined" checked style="margin-right:8px; transform: translateY(1px);" />
+        Odmítl
+      </label>
+
+      <label class="pill" style="cursor:pointer;">
+        <input type="checkbox" id="show_tentative" checked style="margin-right:8px; transform: translateY(1px);" />
+        Možná
+      </label>
+
+      <label class="pill" style="cursor:pointer;">
+        <input type="checkbox" id="only_slackers" style="margin-right:8px; transform: translateY(1px);" />
+        Jen lajdáci (bez akce / možná)
+      </label>
+    </div>
+
+    <div class="hint" style="margin-top:10px;">
+      Seřazeno podle „lajdák skóre“ = <code>bez akce</code> × 2 + <code>možná</code> × 1 (vyšší = horší).
+      Ignorovaní účastníci se nezobrazují a nepočítají.
+    </div>
+  </header>
+
+  <main>
+    <div id="err" class="err"></div>
+
+    <div class="meta">
+      <div id="count">Načítám…</div>
+      <div id="range"></div>
+    </div>
+
+    <div id="out" class="grid"></div>
+    <div id="empty" class="empty" style="display:none;"></div>
+  </main>
+
+  <script>
+    // MUSÍ sedět s config.php API_SHARED_TOKEN
+    const API_TOKEN = "asgfaegsgfasdgsergydgsegseg";
+
+    // Speciální účastníci (stejné jako na hlavní stránce)
+    const SPECIAL = new Map([
+["bukovskyjosef@gmail.com",      { name: "Pepa",   icons: ["🎤"] }],
+      ["lauead@gmail.com",             { name: "Adam",   icons: ["🗣️"] }],
+      ["vojtadr@gmail.com",            { name: "Vojta",  icons: ["🎹"] }],
+      ["qzr@email.cz",                 { name: "Vojtěch",icons: ["🥁"] }],
+      ["standa_kasny@hotmail.com",     { name: "Standa", icons: ["🎸"] }],
+      ["tomas.tarant@gmail.com",     { name: "Tomáš", icons: ["🆃"] }],
+    ]);
+
+    // Ignorovaní účastníci (stejné jako na hlavní stránce)
+    const IGNORE_ATTENDEE_EMAILS = new Set(["info@hackaton.cz", "janca.koutnikova@gmail.com"]);
+
+    let ALL_EVENTS = [];
+    let REPORT = []; // vypočtené reporty
+
+    function setError(msg){
+      const el=document.getElementById("err");
+      if(!msg){ el.style.display="none"; el.textContent=""; return; }
+      el.style.display="block"; el.textContent=msg;
+    }
+
+    function escapeHtml(s){
+      const str = (s === null || s === undefined) ? "" : String(s);
+      return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+    }
+    function escapeAttr(s) {
+      const str = (s === null || s === undefined) ? "" : String(s);
+      return str.replace(/"/g, "%22");
+    }
+
+    function fold(str) {
+      const s = (str === null || str === undefined) ? "" : String(str);
+      return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    function parseIsoDate(s){ const d=new Date(s); return isNaN(d.getTime())?null:d; }
+    function formatDT(d){
+      try { return new Intl.DateTimeFormat("cs-CZ",{dateStyle:"medium",timeStyle:"short"}).format(d); }
+      catch(e) { return d.toISOString(); }
+    }
+
+    function normalizeStatus(raw){
+      const s=fold(raw);
+      if(s==="accepted") return "accepted";
+      if(s==="declined") return "declined";
+      if(s==="tentative") return "tentative";
+      if(s==="needsaction" || s==="") return "needsAction";
+      return "needsAction";
+    }
+
+    function statusTag(status){
+      const s = normalizeStatus(status);
+      if (s === "accepted") return '<span class="tag ok"><span class="dot"></span> Přijal</span>';
+      if (s === "declined") return '<span class="tag no"><span class="dot"></span> Odmítl</span>';
+      if (s === "tentative") return '<span class="tag maybe"><span class="dot"></span> Možná</span>';
+      return '<span class="tag needs"><span class="dot"></span> Bez akce</span>';
+    }
+
+    function displayNameForEmail(email){
+      const e = (email || "").trim().toLowerCase();
+      const sp = SPECIAL.get(e);
+      if (sp) {
+        const icons = (sp.icons||[]).map(ic => `<span class="whoIcon" title="${escapeHtml(sp.name)}">${ic}</span>`).join("");
+        return icons + `<span class="whoText">${escapeHtml(sp.name)}</span>`;
+      }
+      return `<span class="whoIcon">👤</span><span class="whoText" title="${escapeHtml(email)}">${escapeHtml(email)}</span>`;
+    }
+
+    function filterAttendees(list){
+      const out = [];
+      const arr = list || [];
+      for (let i=0;i<arr.length;i++) {
+        const a = arr[i] || {};
+        const email = ((a.email || "") + "").trim().toLowerCase();
+        if (!email) continue;
+        if (IGNORE_ATTENDEE_EMAILS.has(email)) continue;
+        out.push({
+          email: email,
+          status: normalizeStatus(a.status),
+          name: a.name || ""
+        });
+      }
+      return out;
+    }
+
+    function sortEventsByStart(list){
+      const arr = list.slice();
+      arr.sort((a,b)=>{
+        const da = parseIsoDate(a.start);
+        const db = parseIsoDate(b.start);
+        if(!da && !db) return 0; if(!da) return 1; if(!db) return -1;
+        return da - db;
+      });
+      return arr;
+    }
+
+    function computeReport(events){
+      // Map email -> report
+      const map = new Map();
+
+      for (let i=0;i<events.length;i++) {
+        const ev = events[i];
+        const startObj = parseIsoDate(ev.start);
+        const startText = startObj ? formatDT(startObj) : "—";
+        const endObj = parseIsoDate(ev.end);
+        const endText = endObj ? formatDT(endObj) : "";
+
+        const attendees = filterAttendees(ev.attendees || []);
+        for (let j=0;j<attendees.length;j++) {
+          const a = attendees[j];
+          const key = a.email;
+
+          if (!map.has(key)) {
+            map.set(key, {
+              email: key,
+              events: {
+                accepted: [],
+                needsAction: [],
+                declined: [],
+                tentative: []
+              },
+              counts: {
+                accepted: 0, needsAction: 0, declined: 0, tentative: 0
+              }
+            });
+          }
+
+          const rep = map.get(key);
+          const st = a.status;
+
+          const item = {
+            event_id: ev.event_id || "",
+            summary: ev.summary || "— bez summary —",
+            start: ev.start || "",
+            end: ev.end || "",
+            startText: startText,
+            endText: endText,
+            link: ev.event_link || ""
+          };
+
+          if (st === "accepted") { rep.events.accepted.push(item); rep.counts.accepted++; }
+          else if (st === "declined") { rep.events.declined.push(item); rep.counts.declined++; }
+          else if (st === "tentative") { rep.events.tentative.push(item); rep.counts.tentative++; }
+          else { rep.events.needsAction.push(item); rep.counts.needsAction++; }
+        }
+      }
+
+      // finalize
+      const list = Array.from(map.values());
+      for (let i=0;i<list.length;i++) {
+        const r = list[i];
+        r.events.accepted = sortEventsByStart(r.events.accepted);
+        r.events.declined = sortEventsByStart(r.events.declined);
+        r.events.tentative = sortEventsByStart(r.events.tentative);
+        r.events.needsAction = sortEventsByStart(r.events.needsAction);
+
+        // lajdák skóre (vyšší = horší)
+        r.slackScore = r.counts.needsAction * 2 + r.counts.tentative * 1;
+      }
+
+      // seřadit: nejdřív nejhorší, pak abecedně
+      list.sort((a,b)=>{
+        if (b.slackScore !== a.slackScore) return b.slackScore - a.slackScore;
+        return a.email.localeCompare(b.email, "cs");
+      });
+
+      return list;
+    }
+
+    function getUiToggles(){
+      const ga = document.getElementById("show_accepted");
+      const gn = document.getElementById("show_needs");
+      const gd = document.getElementById("show_declined");
+      const gt = document.getElementById("show_tentative");
+      const only = document.getElementById("only_slackers");
+      return {
+        accepted: ga ? ga.checked : true,
+        needs: gn ? gn.checked : true,
+        declined: gd ? gd.checked : true,
+        tentative: gt ? gt.checked : true,
+        onlySlackers: only ? only.checked : false
+      };
+    }
+
+    function sectionHtml(title, items, statusKey){
+      const cnt = items.length;
+      const hdr = `<h3><span>${escapeHtml(title)}</span><span class="mini">${cnt}</span></h3>`;
+      if (!cnt) return `<div class="col">${hdr}<div class="mini">—</div></div>`;
+
+      const rows = items.map(it => {
+        const link = it.link ? `<a href="${escapeAttr(it.link)}" target="_blank" rel="noopener">otevřít</a>` : "";
+        const when = it.endText ? (it.startText + " – " + it.endText) : it.startText;
+        return `<div class="evt">
+          <div class="t">
+            <div class="s" title="${escapeHtml(it.summary)}">${escapeHtml(it.summary)}</div>
+            <div class="d" title="${escapeHtml(when)}">${escapeHtml(when)}</div>
+          </div>
+          <div class="mini">${link}</div>
+        </div>`;
+      }).join("");
+
+      return `<div class="col">${hdr}${rows}</div>`;
+    }
+
+    function render(){
+      const out = document.getElementById("out");
+      const empty = document.getElementById("empty");
+      const count = document.getElementById("count");
+      const range = document.getElementById("range");
+
+      out.innerHTML = "";
+      empty.style.display = "none";
+      range.textContent = "";
+
+      const toggles = getUiToggles();
+
+      // případně jen lajdáci
+      let rows = REPORT.slice();
+      if (toggles.onlySlackers) {
+        rows = rows.filter(r => (r.counts.needsAction > 0 || r.counts.tentative > 0));
+      }
+
+      if (!rows.length) {
+        empty.style.display="block";
+        empty.textContent = "Žádní účastníci v aktuálním filtru.";
+        count.textContent = "0 účastníků";
+        return;
+      }
+
+      // range podle eventů
+      const dates = ALL_EVENTS.map(e => parseIsoDate(e.start)).filter(Boolean).sort((a,b)=>a-b);
+      if (dates.length) {
+        range.textContent = formatDT(dates[0]) + " – " + formatDT(dates[dates.length-1]);
+      }
+
+      count.textContent = rows.length + " účastníků";
+
+      for (let i=0;i<rows.length;i++) {
+        const r = rows[i];
+
+        // tiles: zelená/oranžová/červená podle lajdák score (heuristika)
+        //  - 0 => ok
+        //  - 1-2 => warn
+        //  - >=3 => bad
+        let cls = "event-ok";
+        if (r.slackScore >= 3) cls = "event-bad";
+        else if (r.slackScore >= 1) cls = "event-warn";
+
+        const tile = document.createElement("div");
+        tile.className = "tile " + cls;
+
+        const nameHtml = displayNameForEmail(r.email);
+
+        const kpis = `
+          <div class="kpis">
+            <div class="kpi"><span class="score">Skóre: ${r.slackScore}</span></div>
+            <div class="kpi"><strong>${r.counts.needsAction}</strong> bez akce</div>
+            <div class="kpi"><strong>${r.counts.tentative}</strong> možná</div>
+            <div class="kpi"><strong>${r.counts.declined}</strong> odmítl</div>
+            <div class="kpi"><strong>${r.counts.accepted}</strong> přijal</div>
+          </div>
+        `;
+
+        // sekce dle toggle
+        const cols = [];
+        if (toggles.needs) cols.push(sectionHtml("Bez akce", r.events.needsAction, "needsAction"));
+        if (toggles.tentative) cols.push(sectionHtml("Možná", r.events.tentative, "tentative"));
+        if (toggles.declined) cols.push(sectionHtml("Odmítl", r.events.declined, "declined"));
+        if (toggles.accepted) cols.push(sectionHtml("Přijal", r.events.accepted, "accepted"));
+
+        tile.innerHTML = `
+          <div class="top">
+            <div style="min-width:0;">
+              <div class="who">${nameHtml}</div>
+              <div class="sub">${escapeHtml(r.email)}</div>
+              ${kpis}
+            </div>
+            <div style="text-align:right;">
+              <div class="pill">${r.slackScore === 0 ? "OK" : (r.slackScore >= 3 ? "Lajdák" : "Pozor")}</div>
+            </div>
+          </div>
+
+          <div class="cols">
+            ${cols.join("")}
+          </div>
+        `;
+
+        out.appendChild(tile);
+      }
+    }
+
+    async function load(){
+      setError("");
+      document.getElementById("count").textContent = "Načítám…";
+
+      const url = "/calendar/api/events.php?token=" + encodeURIComponent(API_TOKEN) + "&needle=";
+      const r = await fetch(url, { cache: "no-store" });
+      let data = null;
+      try { data = await r.json(); } catch(e) { data = null; }
+
+      if(!r.ok || !data || data.ok !== true) {
+        const msg = (data && data.error) ? data.error : ("API error (" + r.status + ")");
+        throw new Error(msg);
+      }
+
+      ALL_EVENTS = sortEventsByStart(data.events || []);
+      REPORT = computeReport(ALL_EVENTS);
+
+      render();
+    }
+
+    function hookUi(){
+      document.getElementById("refresh").addEventListener("click", function() {
+        load().catch(function(e) { setError(String(e && e.message ? e.message : e)); });
+      });
+
+      const ids = ["show_accepted","show_needs","show_declined","show_tentative","only_slackers"];
+      for (let i=0;i<ids.length;i++) {
+        const el = document.getElementById(ids[i]);
+        if (el) el.addEventListener("change", render);
+      }
+    }
+
+    hookUi();
+    load().catch(function(e) { setError(String(e && e.message ? e.message : e)); });
+  </script>
+</body>
+</html>
