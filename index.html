@@ -2,6 +2,8 @@
 <html lang="cs">
 
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" type="image/x-icon" href="fav/favicon.png">
 
@@ -19,9 +21,6 @@
   <meta name="twitter:title" content="Hackaton – folk fusion kapela s autorskou tvorbou" />
   <meta name="twitter:description" content="Koncerty, hudba, videa, zpěvník a další novinky pražské kapely Hackaton." />
   <meta name="twitter:image" content="https://www.hackaton.cz/background/image.jpg" />
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hackatón</title>
   <meta name="description" content="Hackatón — autorský folk-rock & pop. Koncerty, hudba, video, zpěvník a kontakt." />
   <style>
@@ -1215,69 +1214,12 @@
   </style>
 </head>
 
-<script>
-  (function () {
-    const form = document.getElementById('invite-form');
-    if (!form) return;
-
-    const emailInput = form.querySelector('input[name="EMAIL"]');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const messageBox = document.getElementById('invite-message');
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const email = emailInput.value.trim();
-
-      messageBox.textContent = '';
-      messageBox.className = 'fineprint';
-
-      if (!email) {
-        messageBox.textContent = 'Zadej prosím e-mail.';
-        messageBox.classList.add('invite-message-error');
-        emailInput.focus();
-        return;
-      }
-
-      if (!emailInput.checkValidity()) {
-        messageBox.textContent = 'Zadej prosím platný e-mail.';
-        messageBox.classList.add('invite-message-error');
-        emailInput.focus();
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Odesílám…';
-
-      try {
-        const formData = new FormData(form);
-
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors'
-        });
-
-        form.reset();
-        messageBox.textContent = 'Díky! Přihlášení proběhlo úspěšně. Mrkni ještě do schránky, jestli nebude potřeba potvrdit odběr.';
-        messageBox.classList.add('invite-message-success');
-      } catch (error) {
-        messageBox.textContent = 'Nepodařilo se odeslat formulář. Zkus to prosím za chvíli znovu.';
-        messageBox.classList.add('invite-message-error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Chci pozvánky na koncerty';
-      }
-    });
-  })();
-</script>
-
 <body>
   <div class="page">
     <main class="shell">
       <header class="hero fade">
         <div class="logo-wrap">
-          <img src="logo/logo.png" alt="Hackatón" />
+          <img src="logo/logo.png" alt="Hackatón" width="2900" height="389" fetchpriority="high" />
         </div>
 
         <p class="subtitle">folk fusion kapela s autorskou tvorbou</p>
@@ -2235,6 +2177,10 @@
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       closeButton.focus();
+
+      const url = new URL(window.location);
+      url.searchParams.set('koncert', templateId);
+      history.pushState({ koncert: templateId }, '', url);
     }
 
     function closeConcertModal() {
@@ -2243,11 +2189,32 @@
       modalContent.innerHTML = '';
       document.body.style.overflow = '';
       if (lastTrigger) lastTrigger.focus();
+
+      const url = new URL(window.location);
+      url.searchParams.delete('koncert');
+      history.pushState({}, '', url);
     }
 
     document.querySelectorAll('[data-modal-target]').forEach((button) => {
       button.addEventListener('click', () => openConcertModal(button.dataset.modalTarget, button));
     });
+
+    window.addEventListener('popstate', () => {
+      const id = new URL(window.location).searchParams.get('koncert');
+      if (id) {
+        openConcertModal(id, null);
+      } else if (modal.classList.contains('is-open')) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+    });
+
+    const initialKoncert = new URL(window.location).searchParams.get('koncert');
+    if (initialKoncert) {
+      openConcertModal(initialKoncert, null);
+    }
 
     closeButton.addEventListener('click', closeConcertModal);
 
@@ -2351,6 +2318,63 @@
     }
 
 
+  </script>
+
+  <script>
+    (function () {
+      const form = document.getElementById('invite-form');
+      if (!form) return;
+
+      const emailInput = form.querySelector('input[name="EMAIL"]');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const messageBox = document.getElementById('invite-message');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+
+        messageBox.textContent = '';
+        messageBox.className = 'fineprint';
+
+        if (!email) {
+          messageBox.textContent = 'Zadej prosím e-mail.';
+          messageBox.classList.add('invite-message-error');
+          emailInput.focus();
+          return;
+        }
+
+        if (!emailInput.checkValidity()) {
+          messageBox.textContent = 'Zadej prosím platný e-mail.';
+          messageBox.classList.add('invite-message-error');
+          emailInput.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Odesílám…';
+
+        try {
+          const formData = new FormData(form);
+
+          await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+          });
+
+          form.reset();
+          messageBox.textContent = 'Díky! Přihlášení proběhlo úspěšně. Mrkni ještě do schránky, jestli nebude potřeba potvrdit odběr.';
+          messageBox.classList.add('invite-message-success');
+        } catch (error) {
+          messageBox.textContent = 'Nepodařilo se odeslat formulář. Zkus to prosím za chvíli znovu.';
+          messageBox.classList.add('invite-message-error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Chci pozvánky na koncerty';
+        }
+      });
+    })();
   </script>
 </body>
 
