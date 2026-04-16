@@ -1,0 +1,47 @@
+<button class="concert-button" type="button" data-modal-target="koncert-2">
+  <div class="concert-left">
+    <div class="concert-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+      </svg>
+    </div>
+    <div class="concert-text">
+      <span class="concert-badge">Nejbližší koncert</span>
+      <p class="concert-title">23. 4. 2026 | Hudební klub Česká 1</p>
+      <p class="concert-desc">Kutná Hora • Start 19:00 • host Zavětrem</p>
+    </div>
+  </div>
+  <span aria-hidden="true">→</span>
+</button>
+
+<template id="koncert-2">
+  <div data-title="23. 4. 2026 | Hudební klub Česká 1 | Kutná Hora"
+    data-subtitle="Čtvrtek • host Zavětrem • komornější akustická sestava">
+    <div class="concert-grid">
+      <div class="info-box">
+        <span class="label">Kdy</span>
+        <p>Čtvrtek 23. dubna 2026 od 19:00. Večer plný autorské muziky, kytar a poctivé energie.</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Kde přesně</span>
+        <p>Hudební klub Česká 1, Kutná Hora.</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Jak se tam dostaneš</span>
+        <p>Do navigace stačí zadat „Hudební klub Česká 1, Kutná Hora". Níže máš přímý odkaz do mapy.</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Co tě čeká</span>
+        <p>Hackatón vyráží poprvé na Kutnohorsko a Zavětrem se vrací na pódium po delší pauze. Zavětrem dorazí v
+          komornější akustické sestavě s důrazem na texty, atmosféru a autorský folk.</p>
+      </div>
+    </div>
+    <div class="inline-links">
+      <a class="pill-link"
+        href="https://www.google.com/maps/search/?api=1&query=Hudebn%C3%AD+klub+%C4%8Cesk%C3%A1+1,+Kutn%C3%A1+Hora"
+        target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+      <a class="pill-link" href="https://www.facebook.com/events/1280919393944677" target="_blank"
+        rel="noopener noreferrer">Facebook událost</a>
+    </div>
+  </div>
+</template>

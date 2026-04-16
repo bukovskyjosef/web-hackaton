@@ -1,0 +1,45 @@
+<button class="concert-button" type="button" data-modal-target="koncert-3">
+  <div class="concert-left">
+    <div class="concert-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+      </svg>
+    </div>
+    <div class="concert-text">
+      <p class="concert-title">7. 5. 2026 | Kamina Boat</p>
+      <p class="concert-desc">Praha • start 19:00 • Zavětrem</p>
+    </div>
+  </div>
+  <span aria-hidden="true">→</span>
+</button>
+
+<template id="koncert-3">
+  <div data-title="7. 5. 2026 | Kamina Boat | Praha" data-subtitle="Čtvrtek • start 19:00 • host Zavětrem">
+    <div class="concert-grid">
+      <div class="info-box">
+        <span class="label">Kdy</span>
+        <p>Čtvrtek 7. května 2026 od 19:00.</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Kde přesně</span>
+        <p>Kamina Boat, Dvořákovo nábřeží, molo 16, Praha.</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Jak se tam dostaneš</span>
+        <p>Do navigace zadej „Kamina Boat, Dvořákovo nábřeží, molo 16, Praha". Odkaz níže tě pošle rovnou do mapy.</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Co tě čeká</span>
+        <p>Hackatón se na Kaminu vrací již poněkolikáté a tentokrát s hostem Zavětrem. Čeká tě večer s autorskou
+          muzikou, komornější atmosférou a výhledem z paluby.</p>
+      </div>
+    </div>
+    <div class="inline-links">
+      <a class="pill-link"
+        href="https://www.google.com/maps/search/?api=1&query=Kamina+Boat,+Dvo%C5%99%C3%A1kovo+n%C3%A1b%C5%99e%C5%BE%C3%AD,+molo+16,+Praha"
+        target="_blank" rel="noopener noreferrer">Otevřít mapu</a>
+      <a class="pill-link" href="https://www.facebook.com/events/932124309469597" target="_blank"
+        rel="noopener noreferrer">Facebook událost</a>
+    </div>
+  </div>
+</template>
