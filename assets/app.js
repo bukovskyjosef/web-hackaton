@@ -162,12 +162,16 @@ function init() {
   }
 
   if (openDownloadsBtn) openDownloadsBtn.addEventListener('click', () => openDownloads(openDownloadsBtn));
+  const openPlayerBtn = document.getElementById('open-player-btn');
+  if (openPlayerBtn) openPlayerBtn.addEventListener('click', () => openDownloads(openPlayerBtn));
   if (downloadsCloseBtn) downloadsCloseBtn.addEventListener('click', closeDownloads);
   if (downloadsModal) {
     downloadsModal.addEventListener('click', (event) => {
       if (event.target === downloadsModal) closeDownloads();
     });
   }
+
+  initPlayer();
 
   // URL param handling
   const initialKoncert = new URL(window.location).searchParams.get('koncert');
@@ -298,6 +302,86 @@ function closeDownloads() {
   downloadsModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   if (lastFooterTrigger) lastFooterTrigger.focus();
+}
+
+// Player
+function initPlayer() {
+  const audio = document.getElementById('player-audio');
+  const bar = document.getElementById('player-bar');
+  const titleEl = document.getElementById('player-title');
+  const progress = document.getElementById('player-progress');
+  const playPauseBtn = document.getElementById('player-play-pause');
+  const iconPlay = document.getElementById('icon-play');
+  const iconPause = document.getElementById('icon-pause');
+  const prevBtn = document.getElementById('player-prev');
+  const nextBtn = document.getElementById('player-next');
+  const trackBtns = Array.from(document.querySelectorAll('.play-track-btn'));
+  let currentIndex = -1;
+
+  function setPlayingRow(index) {
+    trackBtns.forEach((btn, i) => {
+      btn.closest('.download-row').classList.toggle('is-playing', i === index);
+    });
+  }
+
+  function playTrack(index) {
+    currentIndex = index;
+    const btn = trackBtns[index];
+    audio.src = btn.dataset.src;
+    audio.play();
+    titleEl.textContent = btn.dataset.title;
+    bar.hidden = false;
+    setPlayingRow(index);
+    btn.closest('.download-row').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  trackBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => playTrack(i));
+  });
+
+  playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) audio.play(); else audio.pause();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) playTrack(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < trackBtns.length - 1) playTrack(currentIndex + 1);
+  });
+
+  audio.addEventListener('play', () => {
+    iconPlay.hidden = true;
+    iconPause.hidden = false;
+  });
+
+  audio.addEventListener('pause', () => {
+    iconPlay.hidden = false;
+    iconPause.hidden = true;
+  });
+
+  audio.addEventListener('ended', () => {
+    if (currentIndex < trackBtns.length - 1) {
+      playTrack(currentIndex + 1);
+    } else {
+      iconPlay.hidden = false;
+      iconPause.hidden = true;
+      setPlayingRow(-1);
+    }
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      progress.value = (audio.currentTime / audio.duration) * 100;
+    }
+  });
+
+  progress.addEventListener('input', () => {
+    if (audio.duration) {
+      audio.currentTime = (progress.value / 100) * audio.duration;
+    }
+  });
 }
 
 // Invite form IIFE

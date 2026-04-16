@@ -157,170 +157,163 @@
         </button>
       </div>
       <div class="modal-content">
+        <div class="player-bar" id="player-bar" hidden>
+          <div class="player-info">
+            <p class="player-title" id="player-title">—</p>
+            <input class="player-progress" id="player-progress" type="range" min="0" max="100" value="0" aria-label="Pozice přehrávání" />
+          </div>
+          <div class="player-controls">
+            <button class="player-btn" id="player-prev" aria-label="Předchozí">
+              <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+            </button>
+            <button class="player-btn player-btn-main" id="player-play-pause" aria-label="Přehrát/Pauza">
+              <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5.14v13.72l11-6.86Z"/></svg>
+              <svg id="icon-pause" viewBox="0 0 24 24" hidden><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <button class="player-btn" id="player-next" aria-label="Další">
+              <svg viewBox="0 0 24 24"><path d="M14.5 12 6 6v12zm1.5 6h2V6h-2z"/></svg>
+            </button>
+          </div>
+          <audio id="player-audio"></audio>
+        </div>
         <div class="download-list">
           <div class="download-row">
             <p class="download-title">Nebeský zatáčky</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" data-title="Nebeský zatáčky">Přehrát</button>
               <a class="download-link" href="/songs/01-Nebesky%CC%81%20zata%CC%81c%CC%8Cky.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Co jsme víc</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/02-Co%20jsme%20vi%CC%81c.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/02-Co%20jsme%20vi%CC%81c.mp3" data-title="Co jsme víc">Přehrát</button>
               <a class="download-link" href="/songs/02-Co%20jsme%20vi%CC%81c.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Modlitba za vděčnost</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" data-title="Modlitba za vděčnost">Přehrát</button>
               <a class="download-link" href="/songs/03-Modlitba%20za%20vde%CC%8Cc%CC%8Cnost.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Gabriela</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/04-Gabriela.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/04-Gabriela.mp3" data-title="Gabriela">Přehrát</button>
               <a class="download-link" href="/songs/04-Gabriela.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Zima</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/05-Zima.mp3" target="_blank" rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/05-Zima.mp3" data-title="Zima">Přehrát</button>
               <a class="download-link" href="/songs/05-Zima.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Návrat z války</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" data-title="Návrat z války">Přehrát</button>
               <a class="download-link" href="/songs/06-Na%CC%81vrat%20z%20va%CC%81lky.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Kmotřička Smrt</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" data-title="Kmotřička Smrt">Přehrát</button>
               <a class="download-link" href="/songs/07-Kmotr%CC%8Cic%CC%8Cka%20Smrt.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Armáda snílků</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" data-title="Armáda snílků">Přehrát</button>
               <a class="download-link" href="/songs/08-Arma%CC%81da%20sni%CC%81lku%CC%8A.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Na obláčku</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" data-title="Na obláčku">Přehrát</button>
               <a class="download-link" href="/songs/09-Na%20obla%CC%81c%CC%8Cku.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Saganův sen o bleděmodré tečce</p>
             <div class="download-actions">
-              <a class="download-link"
-                href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
-              <a class="download-link"
-                href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3"
-                download>Stáhnout</a>
+              <button class="download-link play-track-btn" data-src="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3" data-title="Saganův sen o bleděmodré tečce">Přehrát</button>
+              <a class="download-link" href="/songs/10-Saganu%CC%8Av%20sen%20o%20blede%CC%8Cmodre%CC%81%20tec%CC%8Cce.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Srdce jako zvon</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/11-Srdce%20jako%20zvon.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/11-Srdce%20jako%20zvon.mp3" data-title="Srdce jako zvon">Přehrát</button>
               <a class="download-link" href="/songs/11-Srdce%20jako%20zvon.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Výletnická I</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" data-title="Výletnická I">Přehrát</button>
               <a class="download-link" href="/songs/12-Vy%CC%81letnicka%CC%81%20I.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Chvála bláznovství</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" data-title="Chvála bláznovství">Přehrát</button>
               <a class="download-link" href="/songs/13-Chva%CC%81la%20bla%CC%81znovstvi%CC%81.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Krysař</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/14-Krysar%CC%8C.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/14-Krysar%CC%8C.mp3" data-title="Krysař">Přehrát</button>
               <a class="download-link" href="/songs/14-Krysar%CC%8C.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Vzteklej Ben</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/15-Vzteklej%20Ben.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/15-Vzteklej%20Ben.mp3" data-title="Vzteklej Ben">Přehrát</button>
               <a class="download-link" href="/songs/15-Vzteklej%20Ben.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Kavárna lepší časy</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3"
-                target="_blank" rel="noopener noreferrer">Přehrát</a>
-              <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3"
-                download>Stáhnout</a>
+              <button class="download-link play-track-btn" data-src="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3" data-title="Kavárna lepší časy">Přehrát</button>
+              <a class="download-link" href="/songs/16-Kava%CC%81rna%20leps%CC%8Ci%CC%81%20c%CC%8Casy.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Skleněnky</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/17-Sklene%CC%8Cnky.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/17-Sklene%CC%8Cnky.mp3" data-title="Skleněnky">Přehrát</button>
               <a class="download-link" href="/songs/17-Sklene%CC%8Cnky.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Peacenička+Skříně nápadů</p>
             <div class="download-actions">
-              <a class="download-link"
-                href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
-              <a class="download-link"
-                href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3"
-                download>Stáhnout</a>
+              <button class="download-link play-track-btn" data-src="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3" data-title="Peacenička+Skříně nápadů">Přehrát</button>
+              <a class="download-link" href="/songs/18-Peacenic%CC%8Cka%2BSkr%CC%8Ci%CC%81ne%CC%8C%20na%CC%81padu%CC%8A.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Dovolená</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/19-Dovolena%CC%81.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/19-Dovolena%CC%81.mp3" data-title="Dovolená">Přehrát</button>
               <a class="download-link" href="/songs/19-Dovolena%CC%81.mp3" download>Stáhnout</a>
             </div>
           </div>
           <div class="download-row">
             <p class="download-title">Charakter</p>
             <div class="download-actions">
-              <a class="download-link" href="/songs/20-Charakter.mp3" target="_blank"
-                rel="noopener noreferrer">Přehrát</a>
+              <button class="download-link play-track-btn" data-src="/songs/20-Charakter.mp3" data-title="Charakter">Přehrát</button>
               <a class="download-link" href="/songs/20-Charakter.mp3" download>Stáhnout</a>
             </div>
           </div>
