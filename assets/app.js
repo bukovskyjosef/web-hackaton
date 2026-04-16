@@ -24,21 +24,28 @@ const MEMBERS = [
   'members/member-vojt-ch.html',
 ];
 
-async function loadFragments() {
-  // 1. Load widgets in order
-  const widgetContainer = document.getElementById('widgets-container');
-  const widgetHtmls = await Promise.all(WIDGETS.map(f => fetch(f).then(r => r.text())));
-  widgetHtmls.forEach(html => {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
-    while (tmp.firstChild) widgetContainer.appendChild(tmp.firstChild);
-  });
+async function fetchFragment(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(`Fragment ${path} se nepodařilo načíst (${r.status})`);
+  return r.text();
+}
 
-  // 2. Load concerts and members in parallel
-  const [concertHtmls, memberHtmls] = await Promise.all([
-    Promise.all(CONCERTS.map(f => fetch(f).then(r => r.text()))),
-    Promise.all(MEMBERS.map(f => fetch(f).then(r => r.text()))),
-  ]);
+async function loadFragments() {
+  try {
+    // 1. Load widgets in order
+    const widgetContainer = document.getElementById('widgets-container');
+    const widgetHtmls = await Promise.all(WIDGETS.map(fetchFragment));
+    widgetHtmls.forEach(html => {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      while (tmp.firstChild) widgetContainer.appendChild(tmp.firstChild);
+    });
+
+    // 2. Load concerts and members in parallel
+    const [concertHtmls, memberHtmls] = await Promise.all([
+      Promise.all(CONCERTS.map(fetchFragment)),
+      Promise.all(MEMBERS.map(fetchFragment)),
+    ]);
 
   const concertList = document.getElementById('concert-list');
   concertHtmls.forEach(html => {
@@ -60,7 +67,10 @@ async function loadFragments() {
     if (tmpl) document.body.appendChild(tmpl);
   });
 
-  init();
+    init();
+  } catch (err) {
+    console.error('Chyba při načítání fragmentů:', err);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', loadFragments);
