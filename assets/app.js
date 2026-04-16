@@ -81,7 +81,10 @@ document.addEventListener('click', (e) => {
   if (btn) openConcertModal(btn.dataset.modalTarget, btn);
 });
 
+let initDone = false;
 function init() {
+  if (initDone) return;
+  initDone = true;
   // Fade observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -145,7 +148,7 @@ function init() {
   }
 
   // Concert modal setup (no direct listeners on buttons — handled by event delegation above)
-  closeButton.addEventListener('click', closeConcertModal);
+  if (closeButton) closeButton.addEventListener('click', closeConcertModal);
 
   modal.addEventListener('click', (event) => {
     if (event.target === modal) {
@@ -202,7 +205,9 @@ function openConcertModal(templateId, trigger) {
   const template = document.getElementById(templateId);
   if (!template) return;
 
-  const wrapper = template.content.firstElementChild.cloneNode(true);
+  const firstEl = template.content.firstElementChild;
+  if (!firstEl) return;
+  const wrapper = firstEl.cloneNode(true);
   modalTitle.textContent = wrapper.dataset.title || 'Koncert';
   modalSubtitle.textContent = wrapper.dataset.subtitle || '';
   wrapper.removeAttribute('data-title');
@@ -214,7 +219,7 @@ function openConcertModal(templateId, trigger) {
   modal.classList.add('is-open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  closeButton.focus();
+  if (closeButton) closeButton.focus();
 
   const url = new URL(window.location);
   url.searchParams.set('koncert', templateId);
@@ -330,7 +335,7 @@ function initPlayer() {
 
   function setPlayingRow(index) {
     trackBtns.forEach((btn, i) => {
-      btn.closest('.download-row').classList.toggle('is-playing', i === index);
+      btn.closest('.download-row')?.classList.toggle('is-playing', i === index);
     });
   }
 
@@ -342,7 +347,7 @@ function initPlayer() {
     titleEl.textContent = btn.dataset.title;
     bar.hidden = false;
     setPlayingRow(index);
-    btn.closest('.download-row').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    btn.closest('.download-row')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   trackBtns.forEach((btn, i) => {
