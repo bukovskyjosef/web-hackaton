@@ -1,50 +1,105 @@
 (function () {
+  // IDs for which a real image file exists in pics/
+  const HAS_IMAGE = new Set([
+    1,2,3,4,5,6,7,8,9,
+    11,12,13,14,15,16,17,
+    19,20,21,22,23,24,25,26,
+    28,29,30,31,32,33,34,35,
+    38,39,40,41,42,43,
+    47,49,51,52,55,58,
+  ]);
+
   const ALL_ITEMS = [
-    { id: 1,  src: 'pics/01.jpg', label: 'Výletnická' },
-    { id: 2,  src: 'pics/02.jpg', label: 'Chvála bláznovství' },
-    { id: 3,  src: 'pics/03.jpg', label: 'Návrat z války' },
-    { id: 4,  src: 'pics/04.jpg', label: 'Ukolébavka' },
-    { id: 5,  src: 'pics/05.jpg', label: 'Betonový srdce' },
-    { id: 6,  src: 'pics/06.jpg', label: 'Prvorození' },
-    { id: 7,  src: 'pics/07.jpg', label: 'Lovec' },
-    { id: 8,  src: 'pics/08.jpg', label: 'Drak' },
-    { id: 9,  src: 'pics/09.jpg', label: 'Nebeský zatáčky' },
-    { id: 11, src: 'pics/11.jpg', label: 'Dieta' },
-    { id: 12, src: 'pics/12.jpg', label: 'Všeobjímající ruský žal' },
-    { id: 13, src: 'pics/13.jpg', label: 'Pachelbelovo odhalení' },
-    { id: 14, src: 'pics/14.jpg', label: 'Zima' },
-    { id: 15, src: 'pics/15.jpg', label: 'Prachy kámo' },
-    { id: 16, src: 'pics/16.jpg', label: 'Rytíř' },
-    { id: 17, src: 'pics/17.jpg', label: 'Platonická' },
-    { id: 19, src: 'pics/19.jpg', label: 'Skříně nápadů' },
-    { id: 20, src: 'pics/20.jpg', label: 'První puška' },
-    { id: 21, src: 'pics/21.jpg', label: 'Rozvodová' },
-    { id: 22, src: 'pics/22.jpg', label: 'Kmotřička smrt' },
-    { id: 23, src: 'pics/23.jpg', label: 'Planeta zem' },
-    { id: 24, src: 'pics/24.jpg', label: 'Ajťácká abeceda' },
-    { id: 25, src: 'pics/25.jpg', label: 'Andělé' },
-    { id: 26, src: 'pics/26.jpg', label: 'Deprese' },
-    { id: 28, src: 'pics/28.jpg', label: 'Pohádková' },
-    { id: 29, src: 'pics/29.jpg', label: 'Beránci' },
-    { id: 30, src: 'pics/30.jpg', label: 'Kacíř' },
-    { id: 31, src: 'pics/31.jpg', label: 'Zapomenout' },
-    { id: 32, src: 'pics/32.jpg', label: 'Dovolená' },
-    { id: 33, src: 'pics/33.jpg', label: 'Charakter' },
-    { id: 34, src: 'pics/34.jpg', label: 'Bitva na řece Allia' },
-    { id: 35, src: 'pics/35.jpg', label: 'Ambulance' },
-    { id: 38, src: 'pics/38.jpg', label: 'Žabák' },
-    { id: 39, src: 'pics/39.jpg', label: 'Lodě s kořením' },
-    { id: 40, src: 'pics/40.jpg', label: 'Gabriela' },
-    { id: 41, src: 'pics/41.jpg', label: 'Celej svět je tvůj' },
-    { id: 42, src: 'pics/42.jpg', label: 'Krysař' },
-    { id: 43, src: 'pics/43.jpg', label: 'Kavárna Lepší Časy' },
-    { id: 47, src: 'pics/47.jpg', label: 'Armáda snílků' },
-    { id: 49, src: 'pics/49.jpg', label: 'Vězení' },
-    { id: 51, src: 'pics/51.jpg', label: 'Modlitba vděčnosti' },
-    { id: 52, src: 'pics/52.jpg', label: 'Vzteklej Ben' },
-    { id: 55, src: 'pics/55.jpg', label: 'Co jsme víc' },
-    { id: 58, src: 'pics/58.jpg', label: 'Na obláčku' },
+    { id: 1,  label: 'Výletnická I.' },
+    { id: 2,  label: 'Chvála bláznovství' },
+    { id: 3,  label: 'Návrat z války' },
+    { id: 4,  label: 'Ukolébavka' },
+    { id: 5,  label: 'Betonový srdce' },
+    { id: 6,  label: 'Prvorození' },
+    { id: 7,  label: 'Lovec' },
+    { id: 8,  label: 'Drak' },
+    { id: 9,  label: 'Nebeský zatáčky' },
+    { id: 10, label: 'Duet' },
+    { id: 11, label: 'Dieta' },
+    { id: 12, label: 'Všeobjímající ruský žal' },
+    { id: 13, label: 'Pachelbelovo odhalení' },
+    { id: 14, label: 'Zima' },
+    { id: 15, label: 'Prachy, kámo' },
+    { id: 16, label: 'Rytíř' },
+    { id: 17, label: 'Platonická' },
+    { id: 18, label: 'Byla noc' },
+    { id: 19, label: 'Skříně nápadů' },
+    { id: 20, label: 'První puška' },
+    { id: 21, label: 'Rozvodová' },
+    { id: 22, label: 'Kmotřička Smrt' },
+    { id: 23, label: 'Planeta zem' },
+    { id: 24, label: 'Ajťácká abeceda' },
+    { id: 25, label: 'Andělé' },
+    { id: 26, label: 'Deprese' },
+    { id: 27, label: '7531' },
+    { id: 28, label: 'Pohádková' },
+    { id: 29, label: 'Beránci' },
+    { id: 30, label: 'Kacíř' },
+    { id: 31, label: 'Zapomenout' },
+    { id: 32, label: 'Dovolená' },
+    { id: 33, label: 'Charakter' },
+    { id: 34, label: 'Bitva na řece Allia' },
+    { id: 35, label: 'Ambulance' },
+    { id: 36, label: 'Máme doma piáno' },
+    { id: 37, label: 'Vláček' },
+    { id: 38, label: 'Žabák' },
+    { id: 39, label: 'Lodě s kořením' },
+    { id: 40, label: 'Gabriela' },
+    { id: 41, label: 'Celej svět je tvůj' },
+    { id: 42, label: 'Krysař' },
+    { id: 43, label: 'Kavárna lepší časy' },
+    { id: 44, label: 'Dospělá' },
+    { id: 45, label: 'Kariérní' },
+    { id: 46, label: 'Zmrzlinář' },
+    { id: 47, label: 'Armáda snílků' },
+    { id: 48, label: 'Slunce a srdce' },
+    { id: 49, label: 'Vězení' },
+    { id: 50, label: 'Láska labutí' },
+    { id: 51, label: 'Modlitba za vděčnost' },
+    { id: 52, label: 'Vzteklej Ben' },
+    { id: 53, label: 'Červenická' },
+    { id: 54, label: 'Slunečnice' },
+    { id: 55, label: 'Co jsme víc' },
+    { id: 56, label: 'Kamarádka' },
+    { id: 57, label: 'Spadla Hvězda' },
+    { id: 58, label: 'Na obláčku' },
+    { id: 59, label: 'Jdu hledat klíč' },
+    { id: 60, label: 'Buchty s mákem' },
+    { id: 61, label: 'Analýza' },
+    { id: 62, label: 'Smolař' },
+    { id: 63, label: 'O Edgarovi a Lenoře' },
+    { id: 64, label: 'Peacenička' },
+    { id: 65, label: 'Nová Táša' },
+    { id: 66, label: 'Holky nevědí' },
+    { id: 67, label: 'Saganův sen o bleděmodré tečce' },
+    { id: 68, label: 'Kaufland' },
+    { id: 69, label: 'Robinsoni' },
+    { id: 70, label: 'Hospodskej týpek' },
+    { id: 71, label: 'Skleněnky' },
+    { id: 72, label: 'Nehroť' },
+    { id: 73, label: 'Srdce jako zvon' },
+    { id: 74, label: 'Kdo jsme my' },
+    { id: 75, label: 'Kočička' },
+    { id: 76, label: 'Koleda' },
+    { id: 77, label: 'Ukrajina' },
+    { id: 78, label: 'Letní láska' },
   ];
+
+  // Visually unique gradient per ID (no text — maintains game challenge)
+  function placeholderStyle(id) {
+    const h1 = (id * 47 + 10) % 360;
+    const h2 = (h1 + 80) % 360;
+    const h3 = (h1 + 160) % 360;
+    return {
+      background: `radial-gradient(circle at 30% 30%, hsl(${h1},72%,22%) 0%, hsl(${h2},50%,12%) 55%, hsl(${h3},40%,8%) 100%)`,
+      accent: `hsl(${h1},80%,55%)`,
+    };
+  }
 
   function shuffle(arr) {
     const a = [...arr];
@@ -99,6 +154,33 @@
     gameComplete.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  function buildImageEl(item) {
+    const div = document.createElement('div');
+    div.className  = 'image-item';
+    div.dataset.id = item.id;
+
+    if (HAS_IMAGE.has(item.id)) {
+      const img = document.createElement('img');
+      img.src = 'pics/' + String(item.id).padStart(2, '0') + '.jpg';
+      img.alt = '';
+      div.appendChild(img);
+    } else {
+      const style = placeholderStyle(item.id);
+      div.style.background = style.background;
+      const deco = document.createElement('span');
+      deco.setAttribute('aria-hidden', 'true');
+      deco.style.cssText = [
+        'position:absolute', 'inset:0', 'display:grid', 'place-items:center',
+        'font-size:42px', 'opacity:.28', 'color:' + style.accent,
+        'user-select:none',
+      ].join(';');
+      deco.textContent = '\u266B'; // ♫ unicode music note, not emoji
+      div.appendChild(deco);
+    }
+
+    return div;
+  }
+
   function initGame() {
     selectedLabel = null;
     correctCount  = 0;
@@ -114,21 +196,19 @@
 
     shuffledLabels.forEach((item, i) => {
       const btn = document.createElement('button');
-      btn.className  = 'label-item';
-      btn.type       = 'button';
+      btn.className   = 'label-item';
+      btn.type        = 'button';
       btn.textContent = item.label;
       btn.dataset.id  = item.id;
-      btn.style.animationDelay = (i * 12) + 'ms';
+      btn.style.animationDelay = (i * 8) + 'ms';
 
       btn.addEventListener('click', () => {
         if (btn.classList.contains('matched')) return;
-
         if (selectedLabel === btn) {
           btn.classList.remove('selected');
           selectedLabel = null;
           return;
         }
-
         if (selectedLabel) selectedLabel.classList.remove('selected');
         selectedLabel = btn;
         btn.classList.add('selected');
@@ -138,19 +218,11 @@
     });
 
     shuffledImages.forEach((item, i) => {
-      const div = document.createElement('div');
-      div.className  = 'image-item';
-      div.dataset.id = item.id;
-      div.style.animationDelay = (i * 12) + 'ms';
-
-      const img = document.createElement('img');
-      img.src = item.src;
-      img.alt = '';
-      div.appendChild(img);
+      const div = buildImageEl(item);
+      div.style.animationDelay = (i * 8) + 'ms';
 
       div.addEventListener('click', () => {
         if (div.classList.contains('matched')) return;
-
         if (!selectedLabel) {
           showToast('Nejdřív vyber název.', 'info');
           addTempClass(div, 'is-wrong', 400);
@@ -158,7 +230,6 @@
         }
 
         const correct = ALL_ITEMS.find(x => x.id == div.dataset.id);
-
         if (selectedLabel.textContent === correct.label) {
           correctCount++;
           matchedCount++;
