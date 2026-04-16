@@ -270,6 +270,15 @@
         border-color: rgba(255, 255, 255, .12);
         box-shadow: none;
       }
+
+      .nav a.active:hover,
+      .nav a.active:focus-visible {
+        background: rgba(255, 179, 92, .14);
+        border-color: rgba(255, 211, 106, .34);
+        box-shadow:
+          0 0 10px rgba(255, 180, 70, .22),
+          0 0 22px rgba(255, 120, 40, .14);
+      }
     }
 
     @media (max-width:1100px) {
@@ -2118,7 +2127,7 @@
           });
         }
       });
-    }, { threshold: 0.45 });
+    }, { threshold: 0, rootMargin: '0px 0px -50% 0px' });
 
     navSections.forEach((section) => navObserver.observe(section));
 
