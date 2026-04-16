@@ -1,81 +1,393 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propojení Obrázků s Názvy</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100%;
-            margin: 0;
-            flex-direction: column;
-            
-        }
-        .stats {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        .container {
-            width: 100vw;
-            display: flex;
-        }
-        .images, .labels {
-            display: flex;
-            flex-wrap: wrap;
-           
-            gap: 10px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackatón – Hra</title>
+  <link rel="icon" type="image/x-icon" href="../fav/favicon.png">
+  <style>
+    :root {
+      --text: #fff7ef;
+      --muted: rgba(255, 247, 239, .78);
+      --border: rgba(255, 255, 255, .14);
+      --accent: #ffb35c;
+      --accent-2: #ff6a3d;
+      --accent-3: #ffd36a;
+    }
 
-            margin-right: 20px;
-        }
-        .label-item {
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100%;
-        }
-        .image-item, .label-item {
-            margin: 1px;
-            border: 2px solid #333;
-            padding: 1px;
-            text-align: center;
-            transition: border-color 0.3s;
-            box-sizing: border-box;
-            width: 200px;
-            height: 200px;
-        }
-        .image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .highlight {
-            background-color: #e0e0e0;
-        }
-        .correct {
-            border-color: green;
-        }
-    </style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background:
+          linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+          url('../background/image.jpg') center/cover no-repeat fixed;
+      }
+    }
+
+    @media (max-width: 767px) {
+      body {
+        background:
+          radial-gradient(circle at 20% 15%, rgba(255,200,50,.35), transparent 25%),
+          radial-gradient(circle at 80% 20%, rgba(255,80,0,.35),  transparent 25%),
+          radial-gradient(circle at 30% 70%, rgba(255,0,0,.30),   transparent 25%),
+          radial-gradient(circle at 70% 75%, rgba(255,150,0,.30), transparent 25%),
+          radial-gradient(circle at 50% 40%, rgba(255,220,120,.25),transparent 30%),
+          #000;
+      }
+    }
+
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px 16px 72px;
+    }
+
+    /* ── Header ── */
+    .game-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: color .18s ease;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    .game-title {
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 900;
+      letter-spacing: .02em;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 18px rgba(255,166,71,.2);
+    }
+
+    .game-desc {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .stat-sep { color: rgba(255,247,239,.25); }
+    .stat-num { color: var(--accent-3); }
+    .stat-num.wrong { color: #ff8888; }
+
+    .progress-bar-wrap {
+      width: 100%;
+      max-width: 360px;
+      margin: 14px auto 0;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,.1);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent-3), var(--accent-2));
+      transition: width .5s ease;
+      width: 0%;
+    }
+
+    /* ── Layout ── */
+    .game-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .game-container { grid-template-columns: 1fr; }
+    }
+
+    .col-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: rgba(255,247,239,.45);
+      margin-bottom: 10px;
+    }
+
+    /* ── Labels ── */
+    .labels-col .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .label-item {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+      min-height: 58px;
+      transition: background .18s, border-color .18s, transform .18s, opacity .3s, box-shadow .18s;
+      user-select: none;
+    }
+
+    .label-item:hover:not(.matched) {
+      background: rgba(255,255,255,.09);
+      transform: translateY(-1px);
+    }
+
+    .label-item.selected {
+      background: rgba(255,179,92,.14);
+      border-color: rgba(255,211,106,.50);
+      box-shadow: 0 0 16px rgba(255,166,71,.18);
+    }
+
+    .label-item.matched {
+      opacity: .28;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ── Images ── */
+    .images-col .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px;
+    }
+
+    .image-item {
+      cursor: pointer;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,.10);
+      transition: border-color .18s, transform .18s, opacity .3s;
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .image-item:hover:not(.matched) {
+      border-color: rgba(255,211,106,.34);
+      transform: translateY(-2px);
+    }
+
+    .image-item.matched {
+      opacity: .32;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .image-item.matched::after {
+      content: '✓';
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      color: #7deda0;
+      background: rgba(0,0,0,.35);
+    }
+
+    /* ── Animations ── */
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-7px); }
+      40%      { transform: translateX(7px); }
+      60%      { transform: translateX(-4px); }
+      80%      { transform: translateX(4px); }
+    }
+
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      45%  { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .is-wrong   { animation: shake .38s ease; }
+    .is-correct { animation: pop   .32s ease; }
+
+    .label-item, .image-item {
+      animation: fade-up .4s ease both;
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      backdrop-filter: blur(16px);
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .22s ease, transform .22s ease;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.toast-correct {
+      background: rgba(40,110,55,.90);
+      border: 1px solid rgba(90,190,100,.35);
+      color: #c8f5d0;
+    }
+
+    .toast.toast-wrong {
+      background: rgba(120,35,35,.90);
+      border: 1px solid rgba(200,90,90,.35);
+      color: #fdd;
+    }
+
+    .toast.toast-info {
+      background: rgba(30,30,30,.92);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--muted);
+    }
+
+    /* ── Completion screen ── */
+    .game-complete {
+      text-align: center;
+      padding: 52px 20px 32px;
+    }
+
+    .complete-title {
+      font-size: clamp(36px, 7vw, 56px);
+      font-weight: 900;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 24px rgba(255,166,71,.28);
+    }
+
+    .complete-stats {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    .complete-stats strong { color: var(--text); }
+
+    .restart-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 32px;
+      border-radius: 999px;
+      border: 0;
+      color: #1f0d06;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffd36a, #ff9a4d 52%, #ff6a3d);
+      box-shadow: 0 14px 30px rgba(255,106,61,.25);
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    .restart-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+  </style>
 </head>
 <body>
-    <p>Nejprve klikněte na název písně vlevo a poté klikněte na obrázek, který k názvu patří.</p>
-    <div class="stats">
-        <span>Správně: <span id="correctCount">0</span></span> | 
-        <span>Špatně: <span id="wrongCount">0</span></span>
+  <div class="page">
+    <header class="game-header">
+      <div><a class="back-link" href="https://www.hackaton.cz/">← hackaton.cz</a></div>
+      <h1 class="game-title">Spáruj píseň s obrázkem</h1>
+      <p class="game-desc">Klikni na název, pak klikni na správný obrázek.</p>
+      <div class="stats">
+        <span><span class="stat-num" id="correctCount">0</span> správně</span>
+        <span class="stat-sep">·</span>
+        <span><span class="stat-num wrong" id="wrongCount">0</span> špatně</span>
+        <span class="stat-sep">·</span>
+        <span><span class="stat-num" id="remainCount">0</span> zbývá</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+    </header>
+
+    <div class="game-container" id="game-container">
+      <div class="labels-col">
+        <p class="col-title">Názvy písní</p>
+        <div class="items-grid" id="labels-grid"></div>
+      </div>
+      <div class="images-col">
+        <p class="col-title">Obrázky</p>
+        <div class="items-grid" id="images-grid"></div>
+      </div>
     </div>
-    <div class="container">
-        <div class="labels">
-            <!-- Sem umístíme názvy -->
-        </div>
-        <div class="images">
-            <!-- Sem umístíme obrázky -->
-        </div>
+
+    <div class="game-complete" id="game-complete" hidden>
+      <p class="complete-title">Hotovo!</p>
+      <p class="complete-stats">
+        Správně: <strong id="finalCorrect">0</strong> &nbsp;·&nbsp;
+        Špatně: <strong id="finalWrong">0</strong>
+      </p>
+      <button class="restart-btn" id="restart-btn" type="button">Hrát znovu</button>
     </div>
-    <script src="app.js"></script>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>

@@ -273,6 +273,8 @@ const downloadsModal = document.getElementById('downloads-modal');
 const openDownloadsBtn = document.getElementById('open-downloads-btn');
 const downloadsCloseBtn = downloadsModal ? downloadsModal.querySelector('.modal-close') : null;
 let lastFooterTrigger = null;
+let _onDownloadsOpen = () => {};
+let _onDownloadsClose = () => {};
 
 function pickOracleText() {
   const idx = Math.floor(Math.random() * oracleCards.length);
@@ -305,6 +307,7 @@ function flipOracle() {
 }
 
 function openDownloads(trigger) {
+  _onDownloadsOpen();
   lastFooterTrigger = trigger || null;
   downloadsModal.classList.add('is-open');
   downloadsModal.setAttribute('aria-hidden', 'false');
@@ -317,6 +320,7 @@ function closeDownloads() {
   downloadsModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   if (lastFooterTrigger) lastFooterTrigger.focus();
+  _onDownloadsClose();
 }
 
 // Player
@@ -331,6 +335,14 @@ function initPlayer() {
   const prevBtn = document.getElementById('player-prev');
   const nextBtn = document.getElementById('player-next');
   const trackBtns = Array.from(document.querySelectorAll('.play-track-btn'));
+  const miniPlayer = document.getElementById('mini-player');
+  const miniTitle = document.getElementById('mini-player-title');
+  const miniPlayPause = document.getElementById('mini-play-pause');
+  const miniIconPlay = document.getElementById('mini-icon-play');
+  const miniIconPause = document.getElementById('mini-icon-pause');
+  const miniPrev = document.getElementById('mini-prev');
+  const miniNext = document.getElementById('mini-next');
+  const miniClose = document.getElementById('mini-player-close');
   let currentIndex = -1;
 
   function setPlayingRow(index) {
@@ -339,12 +351,20 @@ function initPlayer() {
     });
   }
 
+  function syncPlayIcons(paused) {
+    iconPlay.hidden = !paused;
+    iconPause.hidden = paused;
+    if (miniIconPlay) miniIconPlay.hidden = !paused;
+    if (miniIconPause) miniIconPause.hidden = paused;
+  }
+
   function playTrack(index) {
     currentIndex = index;
     const btn = trackBtns[index];
     audio.src = btn.dataset.src;
     audio.play();
     titleEl.textContent = btn.dataset.title;
+    if (miniTitle) miniTitle.textContent = btn.dataset.title;
     bar.hidden = false;
     setPlayingRow(index);
     btn.closest('.download-row')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -366,22 +386,14 @@ function initPlayer() {
     if (currentIndex < trackBtns.length - 1) playTrack(currentIndex + 1);
   });
 
-  audio.addEventListener('play', () => {
-    iconPlay.hidden = true;
-    iconPause.hidden = false;
-  });
-
-  audio.addEventListener('pause', () => {
-    iconPlay.hidden = false;
-    iconPause.hidden = true;
-  });
+  audio.addEventListener('play', () => syncPlayIcons(false));
+  audio.addEventListener('pause', () => syncPlayIcons(true));
 
   audio.addEventListener('ended', () => {
     if (currentIndex < trackBtns.length - 1) {
       playTrack(currentIndex + 1);
     } else {
-      iconPlay.hidden = false;
-      iconPause.hidden = true;
+      syncPlayIcons(true);
       setPlayingRow(-1);
     }
   });
@@ -397,6 +409,32 @@ function initPlayer() {
       audio.currentTime = (progress.value / 100) * audio.duration;
     }
   });
+
+  if (miniPlayPause) miniPlayPause.addEventListener('click', () => {
+    if (audio.paused) audio.play(); else audio.pause();
+  });
+  if (miniPrev) miniPrev.addEventListener('click', () => {
+    if (currentIndex > 0) playTrack(currentIndex - 1);
+  });
+  if (miniNext) miniNext.addEventListener('click', () => {
+    if (currentIndex < trackBtns.length - 1) playTrack(currentIndex + 1);
+  });
+  if (miniClose) miniClose.addEventListener('click', () => {
+    audio.pause();
+    audio.src = '';
+    if (miniPlayer) miniPlayer.hidden = true;
+    bar.hidden = true;
+    currentIndex = -1;
+    setPlayingRow(-1);
+  });
+
+  _onDownloadsOpen = () => { if (miniPlayer) miniPlayer.hidden = true; };
+  _onDownloadsClose = () => {
+    if (miniPlayer && !audio.paused) {
+      if (miniTitle) miniTitle.textContent = titleEl.textContent;
+      miniPlayer.hidden = false;
+    }
+  };
 }
 
 // Invite form IIFE

@@ -327,6 +327,27 @@
     </div>
   </div>
 
+  <div class="mini-player" id="mini-player" hidden>
+    <div class="mini-player-info">
+      <p class="mini-player-title" id="mini-player-title">—</p>
+    </div>
+    <div class="mini-player-controls">
+      <button class="player-btn" id="mini-prev" aria-label="Předchozí">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button class="player-btn player-btn-main" id="mini-play-pause" aria-label="Přehrát/Pauza">
+        <svg id="mini-icon-play" viewBox="0 0 24 24"><path d="M8 5.14v13.72l11-6.86Z"/></svg>
+        <svg id="mini-icon-pause" viewBox="0 0 24 24" hidden><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button class="player-btn" id="mini-next" aria-label="Další">
+        <svg viewBox="0 0 24 24"><path d="M14.5 12 6 6v12zm1.5 6h2V6h-2z"/></svg>
+      </button>
+    </div>
+    <button class="mini-player-close" id="mini-player-close" aria-label="Zavřít přehrávač">
+      <svg viewBox="0 0 24 24"><path d="m18.3 7.1-1.4-1.4L12 10.6 7.1 5.7 5.7 7.1l4.9 4.9-4.9 4.9 1.4 1.4 4.9-4.9 4.9 4.9 1.4-1.4-4.9-4.9 4.9-4.9Z"/></svg>
+    </button>
+  </div>
+
   <script src="assets/app.js"></script>
 </body>
 
