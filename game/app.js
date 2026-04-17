@@ -184,7 +184,7 @@
     gameComplete.hidden  = true;
     updateStats();
 
-    const shuffledLabels = shuffle(ALL_ITEMS);
+    const shuffledLabels = [...ALL_ITEMS].sort((a, b) => a.label.localeCompare(b.label, 'cs'));
     const shuffledImages = shuffle(ALL_ITEMS);
 
     shuffledLabels.forEach((item, i) => {
