@@ -10,7 +10,6 @@ const WIDGETS = [
   'widgets/widget-organizatori.html',
 ];
 const CONCERTS = [
-  'concerts/koncert-2.html',
   'concerts/koncert-3.html',
   'concerts/koncert-4.html',
   'concerts/koncert-5.html',

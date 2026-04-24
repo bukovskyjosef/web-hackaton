@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"/Users/smoulla/Library/CloudStorage/GoogleDrive-bukovskyjosef@gmail.com/Můj disk/Hackatón/Web projekty/new-web\" diff \"concerts/koncert-3.html\")",
+      "Bash(git -C \"/Users/smoulla/Library/CloudStorage/GoogleDrive-bukovskyjosef@gmail.com/Můj disk/Hackatón/Web projekty/new-web\" diff --cached \"concerts/koncert-3.html\")"
+    ]
+  }
+}
