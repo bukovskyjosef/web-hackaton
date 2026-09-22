@@ -9,3 +9,4 @@ calendar/vendor/
 calendar/private/
 calendar/config.php
 calendar/private.json
+.claude
