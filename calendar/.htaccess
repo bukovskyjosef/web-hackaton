@@ -1,3 +1,0 @@
-# /calendar/.htaccess
-# Zabraň, aby WordPress rewrite zasáhl do /calendar (většinou ani nezasáhne, ale tohle je pojistka)
-RewriteEngine Off
