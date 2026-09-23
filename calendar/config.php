@@ -14,11 +14,9 @@ function env_required(string $name): string {
 // Hodnoty z Coolify Environment Variables
 define('GOOGLE_CLIENT_ID', env_required('GOOGLE_CLIENT_ID'));
 define('GOOGLE_CLIENT_SECRET', env_required('GOOGLE_CLIENT_SECRET'));
+define('GOOGLE_REFRESH_TOKEN', env_required('GOOGLE_REFRESH_TOKEN'));
 define('CALENDAR_ID', env_required('CALENDAR_ID'));
 define('API_SHARED_TOKEN', env_required('API_SHARED_TOKEN'));
-
-// Token je uložen lokálně v persistentním adresáři
-define('TOKEN_PATH', __DIR__ . '/private/tokens.json');
 
 // Výchozí filtr
 define('DEFAULT_NEEDLE', 'hackaton');

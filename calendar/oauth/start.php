@@ -1,8 +1,5 @@
 <?php
-require_once __DIR__ . '/google_client.php';
+http_response_code(410);
+header('Content-Type: text/plain; charset=utf-8');
 
-$client = build_google_client();
-$authUrl = $client->createAuthUrl();
-
-header('Location: ' . $authUrl);
-exit;
+echo "OAuth setup endpoint je vypnutý. Google OAuth credential je spravován přes environment variable GOOGLE_REFRESH_TOKEN.\n";

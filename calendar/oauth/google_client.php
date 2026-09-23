@@ -19,50 +19,25 @@ function build_google_client() {
   return $client;
 }
 
-function load_token() {
-  if (!file_exists(TOKEN_PATH)) return null;
-  $raw = file_get_contents(TOKEN_PATH);
-  if ($raw === false) return null;
-  $tok = json_decode($raw, true);
-  return is_array($tok) ? $tok : null;
-}
-
-function save_token($token) {
-  $dir = dirname(TOKEN_PATH);
-  if (!is_dir($dir)) mkdir($dir, 0700, true);
-  file_put_contents(TOKEN_PATH, json_encode($token, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-}
-
 function get_authed_client_or_throw() {
   $client = build_google_client();
-  $token = load_token();
 
-  if (!$token) {
-    throw new RuntimeException("Chybí OAuth token. Otevři /calendar/oauth/start.php a autorizuj.");
+  $token = $client->fetchAccessTokenWithRefreshToken(GOOGLE_REFRESH_TOKEN);
+
+  if (!is_array($token)) {
+    throw new RuntimeException("Google OAuth vrátil neplatnou odpověď při obnově access tokenu.");
+  }
+
+  if (isset($token['error'])) {
+    $message = $token['error_description'] ?? $token['error'];
+    throw new RuntimeException("Refresh token chyba: " . (is_string($message) ? $message : 'neznámá chyba'));
+  }
+
+  if (!isset($token['access_token']) || !is_string($token['access_token']) || $token['access_token'] === '') {
+    throw new RuntimeException("Google OAuth odpověď neobsahuje access token.");
   }
 
   $client->setAccessToken($token);
-
-  if ($client->isAccessTokenExpired()) {
-    $refreshToken = $client->getRefreshToken();
-    if (!$refreshToken && isset($token['refresh_token'])) $refreshToken = $token['refresh_token'];
-
-    if (!$refreshToken) {
-      throw new RuntimeException("Token expiroval a chybí refresh_token. Spusť znovu /calendar/oauth/start.php.");
-    }
-
-    $newToken = $client->fetchAccessTokenWithRefreshToken($refreshToken);
-
-    if (isset($newToken['error'])) {
-      $msg = isset($newToken['error_description']) ? $newToken['error_description'] : $newToken['error'];
-      throw new RuntimeException("Refresh token chyba: " . $msg);
-    }
-
-    if (!isset($newToken['refresh_token'])) $newToken['refresh_token'] = $refreshToken;
-
-    save_token($newToken);
-    $client->setAccessToken($newToken);
-  }
 
   return $client;
 }

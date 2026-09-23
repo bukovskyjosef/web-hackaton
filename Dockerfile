@@ -24,7 +24,4 @@ COPY . /var/www/html/
 
 COPY --from=vendor /app/calendar/vendor /var/www/html/calendar/vendor
 
-RUN mkdir -p /var/www/html/calendar/private \
-    && chown -R www-data:www-data /var/www/html/calendar/private
-
 EXPOSE 80
