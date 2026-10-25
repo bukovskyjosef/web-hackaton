@@ -10,6 +10,8 @@ const WIDGETS = [
   'widgets/widget-organizatori.html',
 ];
 const CONCERTS = [
+  'concerts/koncert-barak.html',
+  'concerts/koncert-scapino.html',
   'concerts/koncert-mandragora.html',
 ];
 const MEMBERS = [

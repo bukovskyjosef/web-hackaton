@@ -1,0 +1,38 @@
+<button class="concert-button" type="button" data-modal-target="barak">
+  <div class="concert-left">
+    <div class="concert-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+      </svg>
+    </div>
+    <div class="concert-text">
+      <span class="concert-badge">Nejbližší koncert</span>
+      <p class="concert-title">14. 11. 2026 | Klub Barák Kostelec nad Černými lesy</p>
+      <p class="concert-desc">Kostelec nad Černými lesy • Začátek 19:00</p>
+    </div>
+  </div>
+  <span aria-hidden="true">→</span>
+</button>
+
+<template id="barak">
+  <div data-title="14. 11. 2026 | Klub Barák Kostelec nad Černými lesy" data-subtitle="Sobota • začátek 19:00">
+    <div class="concert-grid">
+      <div class="info-box">
+        <span class="label">Kdy</span>
+        <p>14. 11. 2026, začátek 19:00</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Kde přesně</span>
+        <p>Klub Barák<br>Kostelec nad Černými lesy</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Co tě čeká</span>
+        <p>Koncert kapely Hackatón v klubu Barák.</p>
+      </div>
+    </div>
+    <div class="inline-links">
+      <a class="pill-link" href="https://mapy.com/?q=Klub%20Bar%C3%A1k%20Kostelec%20nad%20%C4%8Cern%C3%BDmi%20lesy" target="_blank"
+        rel="noopener noreferrer">Otevřít mapu</a>
+    </div>
+  </div>
+</template>

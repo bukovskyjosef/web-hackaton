@@ -1,0 +1,37 @@
+<button class="concert-button" type="button" data-modal-target="scapino">
+  <div class="concert-left">
+    <div class="concert-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM8 12h4v4H8v-4Z" />
+      </svg>
+    </div>
+    <div class="concert-text">
+      <p class="concert-title">16. 11. 2026 | Divadelní klub Scapino Kolín</p>
+      <p class="concert-desc">Kolín • Začátek 18:30 • s kapelou Zavětrem</p>
+    </div>
+  </div>
+  <span aria-hidden="true">→</span>
+</button>
+
+<template id="scapino">
+  <div data-title="16. 11. 2026 | Divadelní klub Scapino Kolín" data-subtitle="Pondělí • začátek 18:30 • hrajeme s kapelou Zavětrem">
+    <div class="concert-grid">
+      <div class="info-box">
+        <span class="label">Kdy</span>
+        <p>16. 11. 2026, začátek 18:30</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Kde přesně</span>
+        <p>Divadelní klub Scapino<br>Kolín</p>
+      </div>
+      <div class="info-box">
+        <span class="label">Co tě čeká</span>
+        <p>Společný koncert kapely Hackatón a kapely Zavětrem.</p>
+      </div>
+    </div>
+    <div class="inline-links">
+      <a class="pill-link" href="https://mapy.com/?q=Divadeln%C3%AD%20klub%20Scapino%20Kol%C3%ADn" target="_blank"
+        rel="noopener noreferrer">Otevřít mapu</a>
+    </div>
+  </div>
+</template>
