@@ -1,0 +1,9 @@
+# Cache hlavičky pro Cloudflare a prohlížeče.
+# HTML (index i fragmenty koncertů, členů, widgetů), JS a CSS se mají vždy
+# ověřit u serveru – po deployi jsou změny hned online. Pokud se soubor
+# nezměnil, server vrátí jen rychlé 304 Not Modified (ETag / Last-Modified).
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

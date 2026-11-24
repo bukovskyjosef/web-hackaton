@@ -20,6 +20,9 @@ RUN apt-get update \
     && docker-php-ext-install mbstring curl \
     && rm -rf /var/lib/apt/lists/*
 
+# mod_headers kvůli Cache-Control hlavičkám v .htaccess
+RUN a2enmod headers
+
 COPY . /var/www/html/
 
 COPY --from=vendor /app/calendar/vendor /var/www/html/calendar/vendor
