@@ -11,6 +11,7 @@ const WIDGETS = [
 ];
 const CONCERTS = [
   'concerts/koncert-mandragora.html',
+  'concerts/koncert-lichnice.html',
 ];
 const MEMBERS = [
   'members/member-pepa.html',
