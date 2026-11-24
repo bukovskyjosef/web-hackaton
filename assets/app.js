@@ -23,7 +23,7 @@ const MEMBERS = [
 ];
 
 async function fetchFragment(path) {
-  const r = await fetch(path);
+  const r = await fetch(path, { cache: 'no-cache' });
   if (!r.ok) throw new Error(`Fragment ${path} se nepodařilo načíst (${r.status})`);
   return r.text();
 }
